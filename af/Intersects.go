@@ -8,37 +8,18 @@
 package af
 
 import (
-	"github.com/pkg/errors"
 	"reflect"
 )
 
 func intersects(args []interface{}) (interface{}, error) {
-
-	at := reflect.TypeOf(args[0])
-	bt := reflect.TypeOf(args[1])
-
-	if at.AssignableTo(stringSetType) && bt.AssignableTo(stringSetType) {
-		a := args[0].(map[string]struct{})
-		b := args[1].(map[string]struct{})
-		for v := range b {
-			if _, ok := a[v]; ok {
-				return true, nil
-			}
+	av := reflect.ValueOf(args[0])
+	bv := reflect.ValueOf(args[1])
+	for _, v := range bv.MapKeys() {
+		if av.MapIndex(v).IsValid() {
+			return true, nil
 		}
-		return false, nil
-	} else if at.AssignableTo(intSetType) && bt.AssignableTo(intSetType) {
-		a := args[0].(map[int]struct{})
-		b := args[1].(map[int]struct{})
-		for v := range b {
-			if _, ok := a[v]; ok {
-				return true, nil
-			}
-		}
-		return false, nil
 	}
-
-	return nil, errors.New("invalid arguments for intersects")
-
+	return false, nil
 }
 
 var Intersects = Function{
