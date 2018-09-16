@@ -7,10 +7,6 @@
 
 package af
 
-import (
-	"github.com/pkg/errors"
-)
-
 func toBytes(args []interface{}) (interface{}, error) {
 	switch x := args[0].(type) {
 	case string:
@@ -20,7 +16,7 @@ func toBytes(args []interface{}) (interface{}, error) {
 	case []byte:
 		return x, nil
 	}
-	return nil, errors.New("invalid arguments for toBytes")
+	return nil, &ErrorInvalidArguments{Function: "ToBigEndian", Arguments: args}
 }
 
 var ToBytes = Function{

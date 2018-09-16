@@ -8,7 +8,6 @@
 package af
 
 import (
-	"github.com/pkg/errors"
 	"strings"
 )
 
@@ -19,7 +18,7 @@ func toLower(args []interface{}) (interface{}, error) {
 		return strings.ToLower(x), nil
 	}
 
-	return nil, errors.New("invalid arguments for toLower")
+	return nil, &ErrorInvalidArguments{Function: "ToLower", Arguments: args}
 }
 
 var ToLower = Function{

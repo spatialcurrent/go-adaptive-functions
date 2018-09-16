@@ -8,18 +8,29 @@
 package af
 
 import (
-	"fmt"
 	"reflect"
 )
 
 func toKeys(args []interface{}) (interface{}, error) {
-	m := args[0]
-	v := reflect.ValueOf(m)
-	keys := make([]string, 0, v.Len())
-	for _, k := range v.MapKeys() {
-		keys = append(keys, fmt.Sprint(k.Interface()))
+	if len(args) != 1 {
+		return nil, &ErrorInvalidArguments{Function: "ToKeys", Arguments: args}
 	}
-	return keys, nil
+
+	m := args[0]
+
+	t := reflect.TypeOf(m)
+	if t.Kind() != reflect.Map {
+		return nil, &ErrorInvalidArguments{Function: "ToKeys", Arguments: args}
+	}
+
+	v := reflect.ValueOf(m)
+
+	keys := reflect.MakeSlice(reflect.SliceOf(t.Key()), 0, v.Len())
+	for _, key := range v.MapKeys() {
+		keys = reflect.Append(keys, key)
+	}
+
+	return keys.Interface(), nil
 }
 
 var ToKeys = Function{
@@ -28,7 +39,7 @@ var ToKeys = Function{
 	Definitions: []Definition{
 		Definition{
 			Inputs: []interface{}{reflect.Map},
-			Output: stringArrayType,
+			Output: reflect.Slice,
 		},
 	},
 	Function: toKeys,

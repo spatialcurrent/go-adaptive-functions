@@ -10,7 +10,6 @@ package af
 import (
 	"bytes"
 	"encoding/binary"
-	"github.com/pkg/errors"
 )
 
 func toBigEndian(args []interface{}) (interface{}, error) {
@@ -32,7 +31,7 @@ func toBigEndian(args []interface{}) (interface{}, error) {
 		err := binary.Write(buf, binary.BigEndian, x)
 		return buf.Bytes(), err
 	}
-	return nil, errors.New("invalid arguments for toBigEndian")
+	return nil, &ErrorInvalidArguments{Function: "ToBigEndian", Arguments: args}
 }
 
 var ToBigEndian = Function{

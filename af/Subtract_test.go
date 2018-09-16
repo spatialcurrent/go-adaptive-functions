@@ -8,18 +8,23 @@
 package af
 
 import (
+	"github.com/pkg/errors"
 	"reflect"
 	"testing"
 )
 
-import (
-	"github.com/pkg/errors"
-)
-
-func TestToArray(t *testing.T) {
+func TestSubtract(t *testing.T) {
 
 	testCases := []TestCase{
-		NewTestCase([]interface{}{map[string]struct{}{"a": struct{}{}, "b": struct{}{}, "c": struct{}{}}}, ToArray, []string{"a", "b", "c"}),
+		NewTestCase([]interface{}{1, 2}, Subtract, -1),
+		NewTestCase([]interface{}{4, 2.0}, Subtract, 2.0),
+		NewTestCase(
+			[]interface{}{
+				map[string]string{"a": "x", "b": "y"},
+				map[string]string{"a": "d"},
+			},
+			Subtract,
+			map[string]string{"b": "y"}),
 	}
 
 	for _, testCase := range testCases {
@@ -31,7 +36,7 @@ func TestToArray(t *testing.T) {
 		got, err := testCase.Function.Run(testCase.Inputs)
 		if err != nil {
 			t.Errorf(errors.Wrap(err, "error running function \""+reflect.TypeOf(testCase.Function).Name()+"\"").Error())
-		} else if !reflect.DeepEqual(Sort.MustRun([]interface{}{got}), testCase.Output) {
+		} else if !reflect.DeepEqual(got, testCase.Output) {
 			t.Errorf(testCase.Function.Name+"(%v) == %v (%v), want %v (%s)", testCase.Inputs, got, reflect.TypeOf(got), testCase.Output, reflect.TypeOf(testCase.Output))
 		}
 	}

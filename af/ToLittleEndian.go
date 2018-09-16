@@ -10,7 +10,6 @@ package af
 import (
 	"bytes"
 	"encoding/binary"
-	"github.com/pkg/errors"
 )
 
 func toLittleEndian(args []interface{}) (interface{}, error) {
@@ -32,7 +31,7 @@ func toLittleEndian(args []interface{}) (interface{}, error) {
 		err := binary.Write(buf, binary.LittleEndian, x)
 		return buf.Bytes(), err
 	}
-	return nil, errors.New("invalid arguments for toLittleEndian")
+	return nil, &ErrorInvalidArguments{Function: "ToLittleEndian", Arguments: args}
 }
 
 var ToLittleEndian = Function{

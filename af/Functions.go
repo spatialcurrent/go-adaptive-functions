@@ -8,6 +8,7 @@
 package af
 
 var Functions = []Function{
+	Add,
 	ToArray,
 	ToBigEndian,
 	Bottom,
@@ -27,9 +28,13 @@ var Functions = []Function{
 	Repeat,
 	ToSet,
 	Split,
+	Sort,
+	Subtract,
 	ToString,
 	Top,
 	ToUpper,
 	ToValues,
 	Intersects,
+	TileX,
+	TileY,
 }

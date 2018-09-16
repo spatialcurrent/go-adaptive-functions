@@ -13,6 +13,16 @@ import (
 
 func getLength(args []interface{}) (interface{}, error) {
 
+	if len(args) != 1 {
+		return nil, &ErrorInvalidArguments{Function: "GetLength", Arguments: args}
+	}
+
+	t := reflect.TypeOf(args[0])
+
+	if !(t.Kind() == reflect.Array || t.Kind() == reflect.Slice || t.Kind() == reflect.String) {
+		return nil, &ErrorInvalidArguments{Function: "GetLength", Arguments: args}
+	}
+
 	return reflect.ValueOf(args[0]).Len(), nil
 
 }

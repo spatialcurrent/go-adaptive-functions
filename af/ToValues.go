@@ -12,13 +12,25 @@ import (
 )
 
 func toValues(args []interface{}) (interface{}, error) {
-	m := args[0]
-	v := reflect.ValueOf(m)
-	values := make([]interface{}, 0, v.Len())
-	for _, key := range v.MapKeys() {
-		values = append(values, v.MapIndex(key).Interface())
+	if len(args) != 1 {
+		return nil, &ErrorInvalidArguments{Function: "ToValues", Arguments: args}
 	}
-	return values, nil
+
+	m := args[0]
+
+	t := reflect.TypeOf(m)
+	if t.Kind() != reflect.Map {
+		return nil, &ErrorInvalidArguments{Function: "ToValues", Arguments: args}
+	}
+
+	v := reflect.ValueOf(m)
+
+	values := reflect.MakeSlice(reflect.SliceOf(t.Elem()), 0, v.Len())
+	for _, key := range v.MapKeys() {
+		values = reflect.Append(values, v.MapIndex(key))
+	}
+
+	return values.Interface(), nil
 }
 
 var ToValues = Function{

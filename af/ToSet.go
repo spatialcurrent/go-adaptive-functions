@@ -16,7 +16,7 @@ func toSet(args []interface{}) (interface{}, error) {
 	t := reflect.TypeOf(args[0])
 	s := reflect.ValueOf(args[0])
 
-	m := reflect.MakeMap(reflect.MapOf(t.Elem(), structType))
+	m := reflect.MakeMap(reflect.MapOf(t.Elem(), emptyStructType))
 	for i := 0; i < s.Len(); i++ {
 		m.SetMapIndex(s.Index(i), reflect.ValueOf(struct{}{}))
 	}

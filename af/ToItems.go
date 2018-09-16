@@ -12,12 +12,24 @@ import (
 )
 
 func toItems(args []interface{}) (interface{}, error) {
-
-	m := reflect.ValueOf(args[0])
-	arr := make([][]interface{}, 0, m.Len())
-	for _, k := range m.MapKeys() {
-		arr = append(arr, []interface{}{k.Interface(), m.MapIndex(k).Interface()})
+	if len(args) != 1 {
+		return nil, &ErrorInvalidArguments{Function: "ToItems", Arguments: args}
 	}
+
+	m := args[0]
+
+	t := reflect.TypeOf(m)
+	if t.Kind() != reflect.Map {
+		return nil, &ErrorInvalidArguments{Function: "ToItems", Arguments: args}
+	}
+
+	v := reflect.ValueOf(m)
+
+	arr := make([][]interface{}, 0, v.Len())
+	for _, k := range v.MapKeys() {
+		arr = append(arr, []interface{}{k.Interface(), v.MapIndex(k).Interface()})
+	}
+
 	return arr, nil
 }
 

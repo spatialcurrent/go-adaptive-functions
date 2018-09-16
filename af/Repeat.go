@@ -9,8 +9,6 @@ package af
 
 import (
 	"bytes"
-	"fmt"
-	"github.com/pkg/errors"
 	"reflect"
 	"strings"
 )
@@ -35,7 +33,7 @@ func repeat(args []interface{}) (interface{}, error) {
 		}
 	}
 
-	return nil, errors.New("invalid arguments " + fmt.Sprint(reflect.TypeOf(args[0])) + " , " + fmt.Sprint(reflect.TypeOf(args[1])))
+	return nil, &ErrorInvalidArguments{Function: "Repeat", Arguments: args}
 
 }
 

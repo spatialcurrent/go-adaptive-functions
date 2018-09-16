@@ -8,44 +8,38 @@
 package af
 
 import (
-	"github.com/pkg/errors"
 	"reflect"
 )
 
 func toArray(args []interface{}) (interface{}, error) {
 
-	switch set := args[0].(type) {
-	case map[string]struct{}:
-		arr := make([]string, 0, len(set))
-		for v := range set {
-			arr = append(arr, v)
-		}
-		return arr, nil
-	case map[int]struct{}:
-		arr := make([]int, 0, len(set))
-		for v := range set {
-			arr = append(arr, v)
-		}
-		return arr, nil
-	case map[interface{}]struct{}:
-		arr := make([]interface{}, 0, len(set))
-		for v := range set {
-			arr = append(arr, v)
-		}
-		return arr, nil
+	if len(args) != 1 {
+		return nil, &ErrorInvalidArguments{Function: "ToArray", Arguments: args}
 	}
 
-	t := reflect.TypeOf(args[0])
-	if t.Kind() == reflect.Map {
-		m := reflect.ValueOf(args[0])
-		arr := make([][]interface{}, 0, m.Len())
-		for _, k := range m.MapKeys() {
-			arr = append(arr, []interface{}{k.Interface(), m.MapIndex(k).Interface()})
-		}
-		return arr, nil
+	m := args[0]
+
+	t := reflect.TypeOf(m)
+	if t.Kind() != reflect.Map {
+		return nil, &ErrorInvalidArguments{Function: "ToArray", Arguments: args}
 	}
 
-	return nil, errors.New("invalid arguments for toArray")
+	v := reflect.ValueOf(m)
+
+	if t.Elem().AssignableTo(emptyStructType) {
+		// if elem is an empty struct assume input is a set
+		keys := reflect.MakeSlice(reflect.SliceOf(t.Key()), 0, v.Len())
+		for _, key := range v.MapKeys() {
+			keys = reflect.Append(keys, key)
+		}
+		return keys.Interface(), nil
+	}
+
+	arr := make([][]interface{}, 0, v.Len())
+	for _, k := range v.MapKeys() {
+		arr = append(arr, []interface{}{k.Interface(), v.MapIndex(k).Interface()})
+	}
+	return arr, nil
 }
 
 var ToArray = Function{

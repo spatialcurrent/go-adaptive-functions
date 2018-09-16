@@ -8,7 +8,6 @@
 package af
 
 import (
-	"github.com/pkg/errors"
 	"reflect"
 )
 
@@ -29,15 +28,17 @@ func flatten(args []interface{}) (interface{}, error) {
 					output = append(output, v.Index(i).Interface())
 				}
 			} else {
-				return nil, errors.New("invalid arguments for flatten")
+				return nil, &ErrorInvalidArguments{Function: "Flatten", Arguments: args}
 			}
 		}
 		return output, nil
 	}
 
-	return nil, errors.New("invalid arguments for flatten")
+	return nil, &ErrorInvalidArguments{Function: "Flatten", Arguments: args}
 }
 
+// Flatten is a function that flattens an array of arrays
+//  - flatten([]interface{[]interface{"a", "b"},[]interface{"c", "d"}}) == []interface{}{"a","b","c","d"}
 var Flatten = Function{
 	Name:    "Flatten",
 	Aliases: []string{"flatten"},

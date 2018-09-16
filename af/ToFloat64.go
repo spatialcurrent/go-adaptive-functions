@@ -7,10 +7,6 @@
 
 package af
 
-import (
-	"github.com/pkg/errors"
-)
-
 func toFloat64(args []interface{}) (interface{}, error) {
 	switch x := args[0].(type) {
 	case int:
@@ -26,7 +22,7 @@ func toFloat64(args []interface{}) (interface{}, error) {
 	case float64:
 		return x, nil
 	}
-	return nil, errors.New("invalid arguments for toFloat64")
+	return nil, &ErrorInvalidArguments{Function: "ToBigEndian", Arguments: args}
 }
 
 var ToFloat64 = Function{

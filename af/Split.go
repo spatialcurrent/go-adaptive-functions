@@ -23,7 +23,7 @@ func split(args []interface{}) (interface{}, error) {
 		}
 	}
 
-	return nil, nil
+	return nil, &ErrorInvalidArguments{Function: "Split", Arguments: args}
 
 }
 

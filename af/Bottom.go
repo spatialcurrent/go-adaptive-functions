@@ -8,7 +8,6 @@
 package af
 
 import (
-	"github.com/pkg/errors"
 	"github.com/spatialcurrent/go-counter/counter"
 )
 
@@ -39,7 +38,7 @@ func bottom(args []interface{}) (interface{}, error) {
 		}
 	}
 
-	return nil, errors.New("invalid arguments for bottom")
+	return nil, &ErrorInvalidArguments{Function: "Bottom", Arguments: args}
 
 }
 

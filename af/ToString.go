@@ -7,10 +7,6 @@
 
 package af
 
-import (
-	"github.com/pkg/errors"
-)
-
 func toString(args []interface{}) (interface{}, error) {
 	switch x := args[0].(type) {
 	case string:
@@ -20,7 +16,7 @@ func toString(args []interface{}) (interface{}, error) {
 	case []byte:
 		return string(x), nil
 	}
-	return nil, errors.New("invalid arguments for toString")
+	return nil, &ErrorInvalidArguments{Function: "ToString", Arguments: args}
 }
 
 var ToString = Function{

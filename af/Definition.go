@@ -11,11 +11,13 @@ import (
 	"reflect"
 )
 
+// Definition is a struct containing a function definition
 type Definition struct {
-	Inputs []interface{}
-	Output interface{}
+	Inputs []interface{} // an array of types or kinds
+	Output interface{}   // the type or kind returned by the defined function
 }
 
+// IsValid returns true if the args match the kinds or types or the definition.
 func (d Definition) IsValid(args []interface{}) bool {
 	if len(args) != len(d.Inputs) {
 		return false

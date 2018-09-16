@@ -8,7 +8,6 @@
 package af
 
 import (
-	"github.com/pkg/errors"
 	"strings"
 )
 
@@ -19,7 +18,7 @@ func toUpper(args []interface{}) (interface{}, error) {
 		return strings.ToUpper(x), nil
 	}
 
-	return nil, errors.New("invalid arguments for toUpper")
+	return nil, &ErrorInvalidArguments{Function: "ToUpper", Arguments: args}
 }
 
 var ToUpper = Function{

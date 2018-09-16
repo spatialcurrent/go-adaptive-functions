@@ -7,10 +7,6 @@
 
 package af
 
-import (
-	"github.com/pkg/errors"
-)
-
 func toInt32(args []interface{}) (interface{}, error) {
 	switch x := args[0].(type) {
 	case int:
@@ -24,7 +20,7 @@ func toInt32(args []interface{}) (interface{}, error) {
 	case int64:
 		return int32(x), nil
 	}
-	return nil, errors.New("invalid arguments for toInt32")
+	return nil, &ErrorInvalidArguments{Function: "ToBigEndian", Arguments: args}
 }
 
 var ToInt32 = Function{
