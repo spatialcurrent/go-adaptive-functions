@@ -15,10 +15,9 @@ import (
 
 func TestRepeat(t *testing.T) {
 
-	ctx := []interface{}{"abc", 2}
-
 	testCases := []TestCase{
-		NewTestCase(ctx, Repeat, "abcabc"),
+		NewTestCase([]interface{}{"abc", 2}, Repeat, "abcabc"),
+		NewTestCase([]interface{}{[]byte("abc"), 3}, Repeat, []byte("abcabcabc")),
 	}
 
 	for _, testCase := range testCases {

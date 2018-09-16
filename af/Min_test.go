@@ -13,12 +13,12 @@ import (
 	"testing"
 )
 
-func TestToValues(t *testing.T) {
-
-	ctx := map[string]int{"a": 2, "b": 3}
+func TestMin(t *testing.T) {
 
 	testCases := []TestCase{
-		NewTestCase([]interface{}{ctx}, ToValues, []int{2, 3}),
+		NewTestCase([]interface{}{1, 2}, Min, 1),
+		NewTestCase([]interface{}{[]int{4, 2}}, Min, 2),
+		NewTestCase([]interface{}{[]float64{4.12, 2.22}}, Min, 2.22),
 	}
 
 	for _, testCase := range testCases {
@@ -30,7 +30,7 @@ func TestToValues(t *testing.T) {
 		got, err := testCase.Function.Run(testCase.Inputs)
 		if err != nil {
 			t.Errorf(errors.Wrap(err, "error running function \""+reflect.TypeOf(testCase.Function).Name()+"\"").Error())
-		} else if !reflect.DeepEqual(Sort.MustRun([]interface{}{got}), testCase.Output) {
+		} else if !reflect.DeepEqual(got, testCase.Output) {
 			t.Errorf(testCase.Function.Name+"(%v) == %v (%v), want %v (%s)", testCase.Inputs, got, reflect.TypeOf(got), testCase.Output, reflect.TypeOf(testCase.Output))
 		}
 	}

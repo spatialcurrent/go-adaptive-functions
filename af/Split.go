@@ -31,10 +31,7 @@ var Split = Function{
 	Name:    "Split",
 	Aliases: []string{"split"},
 	Definitions: []Definition{
-		Definition{
-			Inputs: []interface{}{stringType, stringType},
-			Output: reflect.Slice,
-		},
+		Definition{Inputs: []interface{}{stringType, stringType}, Output: reflect.Slice},
 	},
 	Function: split,
 }

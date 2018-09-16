@@ -35,6 +35,8 @@ var float64Type = reflect.TypeOf(0.0)
 var byteArrayType = reflect.TypeOf([]byte{})
 var stringArrayType = reflect.TypeOf([]string{})
 var intArrayType = reflect.TypeOf([]int{})
+var int64ArrayType = reflect.TypeOf([]int64{})
+var float64ArrayType = reflect.TypeOf([]float64{})
 var interfaceArrayType = reflect.TypeOf([]interface{}{})
 var interface2DArrayType = reflect.TypeOf([][]interface{}{})
 

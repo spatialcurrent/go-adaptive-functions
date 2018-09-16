@@ -15,22 +15,28 @@ import (
 
 func repeat(args []interface{}) (interface{}, error) {
 
-	switch value := args[0].(type) {
-	case string:
-		switch count := args[1].(type) {
-		case int:
-			return strings.Repeat(value, count), nil
+	if len(args) != 2 {
+		return nil, &ErrorInvalidArguments{Function: "Repeat", Arguments: args}
+	}
+
+	switch count := args[1].(type) {
+	case int:
+		switch v := args[0].(type) {
+		case string:
+			return strings.Repeat(v, count), nil
+		case byte:
+			return bytes.Repeat([]byte{v}, count), nil
 		}
-	case []byte:
-		switch count := args[1].(type) {
-		case int:
-			return bytes.Repeat(value, count), nil
+		t := reflect.TypeOf(args[0])
+		if !(t.Kind() == reflect.Array || t.Kind() == reflect.Slice) {
+			return nil, &ErrorInvalidArguments{Function: "Repeat", Arguments: args}
 		}
-	case byte:
-		switch count := args[1].(type) {
-		case int:
-			return bytes.Repeat([]byte{value}, count), nil
+		v := reflect.ValueOf(args[0])
+		arr := reflect.MakeSlice(t, 0, count*v.Len())
+		for i := 0; i < count; i++ {
+			arr = reflect.AppendSlice(arr, v)
 		}
+		return arr.Interface(), nil
 	}
 
 	return nil, &ErrorInvalidArguments{Function: "Repeat", Arguments: args}
