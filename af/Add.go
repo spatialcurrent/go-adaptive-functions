@@ -83,14 +83,29 @@ func add(args []interface{}) (interface{}, error) {
 		switch bv := b.(type) {
 		case int:
 			return av + bv, nil
+		case int32:
+			return int32(av) + bv, nil
 		case int64:
 			return int64(av) + bv, nil
+		case float64:
+			return float64(av) + bv, nil
+		}
+	case int32:
+		switch bv := b.(type) {
+		case int:
+			return av + int32(bv), nil
+		case int32:
+			return av + bv, nil
+		case int64:
+			return av + int32(bv), nil
 		case float64:
 			return float64(av) + bv, nil
 		}
 	case int64:
 		switch bv := b.(type) {
 		case int:
+			return av + int64(bv), nil
+		case int32:
 			return av + int64(bv), nil
 		case int64:
 			return av + bv, nil
@@ -100,6 +115,8 @@ func add(args []interface{}) (interface{}, error) {
 	case float64:
 		switch bv := b.(type) {
 		case int:
+			return av + float64(bv), nil
+		case int32:
 			return av + float64(bv), nil
 		case int64:
 			return av + float64(bv), nil
@@ -125,6 +142,14 @@ var Add = Function{
 		Definition{Inputs: []interface{}{reflect.Float64, reflect.Int64}, Output: reflect.Int},
 		Definition{Inputs: []interface{}{reflect.Float64, reflect.Float64}, Output: reflect.Float64},
 		Definition{Inputs: []interface{}{reflect.String, reflect.String}, Output: reflect.String},
+		Definition{Inputs: []interface{}{reflect.Int, reflect.String}, Output: reflect.String},
+		Definition{Inputs: []interface{}{reflect.Int32, reflect.String}, Output: reflect.String},
+		Definition{Inputs: []interface{}{reflect.Int64, reflect.String}, Output: reflect.String},
+		Definition{Inputs: []interface{}{reflect.Float64, reflect.String}, Output: reflect.String},
+		Definition{Inputs: []interface{}{reflect.String, reflect.Int}, Output: reflect.String},
+		Definition{Inputs: []interface{}{reflect.String, reflect.Int32}, Output: reflect.String},
+		Definition{Inputs: []interface{}{reflect.String, reflect.Int64}, Output: reflect.String},
+		Definition{Inputs: []interface{}{reflect.String, reflect.Float64}, Output: reflect.String},
 		Definition{Inputs: []interface{}{reflect.Slice, reflect.Array}, Output: reflect.Slice},
 		Definition{Inputs: []interface{}{reflect.Slice, reflect.Slice}, Output: reflect.Slice},
 		Definition{Inputs: []interface{}{reflect.Array, reflect.Array}, Output: reflect.Slice},

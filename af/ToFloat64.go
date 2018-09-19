@@ -7,6 +7,11 @@
 
 package af
 
+import (
+	"reflect"
+	"strconv"
+)
+
 func toFloat64(args []interface{}) (interface{}, error) {
 	switch x := args[0].(type) {
 	case int:
@@ -21,8 +26,10 @@ func toFloat64(args []interface{}) (interface{}, error) {
 		return float64(x), nil
 	case float64:
 		return x, nil
+	case string:
+		return strconv.ParseFloat(x, 64)
 	}
-	return nil, &ErrorInvalidArguments{Function: "ToBigEndian", Arguments: args}
+	return nil, &ErrorInvalidArguments{Function: "ToFloat32", Arguments: args}
 }
 
 var ToFloat64 = Function{
@@ -35,6 +42,7 @@ var ToFloat64 = Function{
 		Definition{Inputs: []interface{}{int32Type}, Output: float64Type},
 		Definition{Inputs: []interface{}{int64Type}, Output: float64Type},
 		Definition{Inputs: []interface{}{float64Type}, Output: float64Type},
+		Definition{Inputs: []interface{}{reflect.String}, Output: float64Type},
 	},
 	Function: toFloat64,
 }

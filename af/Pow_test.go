@@ -13,11 +13,12 @@ import (
 	"testing"
 )
 
-func TestToInt64(t *testing.T) {
+func TestPow(t *testing.T) {
 
 	testCases := []TestCase{
-		NewTestCase([]interface{}{12}, ToInt64, int64(12)),
-		NewTestCase([]interface{}{"124"}, ToInt64, int64(124)),
+		NewTestCase([]interface{}{1, 2}, Pow, 1.0),
+		NewTestCase([]interface{}{2, 3}, Pow, 8.0),
+		NewTestCase([]interface{}{4.0, 2}, Pow, 16.0),
 	}
 
 	for _, testCase := range testCases {

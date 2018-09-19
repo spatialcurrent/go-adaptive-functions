@@ -30,6 +30,7 @@ var uint16Type = reflect.TypeOf(uint16(0))
 var uint32Type = reflect.TypeOf(uint32(0))
 var uint64Type = reflect.TypeOf(uint64(0))
 
+var float32Type = reflect.TypeOf(float32(0.0))
 var float64Type = reflect.TypeOf(0.0)
 
 var byteArrayType = reflect.TypeOf([]byte{})

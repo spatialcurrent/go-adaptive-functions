@@ -20,6 +20,7 @@ func TestToInt32(t *testing.T) {
 
 	testCases := []TestCase{
 		NewTestCase([]interface{}{12}, ToInt32, int32(12)),
+		NewTestCase([]interface{}{"124"}, ToInt32, int32(124)),
 	}
 
 	for _, testCase := range testCases {

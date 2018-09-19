@@ -13,11 +13,11 @@ import (
 	"testing"
 )
 
-func TestToInt64(t *testing.T) {
+func TestToFloat32(t *testing.T) {
 
 	testCases := []TestCase{
-		NewTestCase([]interface{}{12}, ToInt64, int64(12)),
-		NewTestCase([]interface{}{"124"}, ToInt64, int64(124)),
+		NewTestCase([]interface{}{12}, ToFloat32, float32(12)),
+		NewTestCase([]interface{}{"12.132123"}, ToFloat32, float32(12.132123)),
 	}
 
 	for _, testCase := range testCases {

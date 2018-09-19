@@ -17,6 +17,7 @@ func TestToFloat64(t *testing.T) {
 
 	testCases := []TestCase{
 		NewTestCase([]interface{}{12}, ToFloat64, float64(12)),
+		NewTestCase([]interface{}{"12.132123"}, ToFloat64, 12.132123),
 	}
 
 	for _, testCase := range testCases {

@@ -7,6 +7,11 @@
 
 package af
 
+import (
+	"reflect"
+	"strconv"
+)
+
 func toInt8(args []interface{}) (interface{}, error) {
 	switch x := args[0].(type) {
 	case int:
@@ -19,8 +24,14 @@ func toInt8(args []interface{}) (interface{}, error) {
 		return int8(x), nil
 	case int64:
 		return int8(x), nil
+	case string:
+		i, err := strconv.ParseInt(x, 10, 8)
+		if err != nil {
+			return i, err
+		}
+		return int16(i), nil
 	}
-	return nil, &ErrorInvalidArguments{Function: "ToBigEndian", Arguments: args}
+	return nil, &ErrorInvalidArguments{Function: "ToInt8", Arguments: args}
 }
 
 var ToInt8 = Function{
@@ -32,6 +43,7 @@ var ToInt8 = Function{
 		Definition{Inputs: []interface{}{int16Type}, Output: int8Type},
 		Definition{Inputs: []interface{}{int32Type}, Output: int8Type},
 		Definition{Inputs: []interface{}{int64Type}, Output: int8Type},
+		Definition{Inputs: []interface{}{reflect.String}, Output: int8Type},
 	},
 	Function: toInt8,
 }

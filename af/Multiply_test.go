@@ -13,11 +13,11 @@ import (
 	"testing"
 )
 
-func TestToInt64(t *testing.T) {
+func TestMultiply(t *testing.T) {
 
 	testCases := []TestCase{
-		NewTestCase([]interface{}{12}, ToInt64, int64(12)),
-		NewTestCase([]interface{}{"124"}, ToInt64, int64(124)),
+		NewTestCase([]interface{}{1, 2}, Multiply, 2),
+		NewTestCase([]interface{}{4, 2.0}, Multiply, 8.0),
 	}
 
 	for _, testCase := range testCases {

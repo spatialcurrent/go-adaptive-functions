@@ -65,6 +65,8 @@ func subtract(args []interface{}) (interface{}, error) {
 		switch bv := b.(type) {
 		case int:
 			return av - float64(bv), nil
+		case int32:
+			return av - float64(bv), nil
 		case int64:
 			return av - float64(bv), nil
 		case float64:
@@ -77,10 +79,11 @@ func subtract(args []interface{}) (interface{}, error) {
 
 var Subtract = Function{
 	Name:    "Subtract",
-	Aliases: []string{"subtract"},
+	Aliases: []string{"subtract", "sub"},
 	Definitions: []Definition{
 		Definition{Inputs: []interface{}{reflect.Int, reflect.Int}, Output: reflect.Int},
-		Definition{Inputs: []interface{}{reflect.Int, reflect.Int64}, Output: reflect.Int},
+		Definition{Inputs: []interface{}{reflect.Int, reflect.Int32}, Output: reflect.Int},
+		Definition{Inputs: []interface{}{reflect.Int, reflect.Int64}, Output: reflect.Int64},
 		Definition{Inputs: []interface{}{reflect.Int, reflect.Float64}, Output: reflect.Float64},
 		Definition{Inputs: []interface{}{reflect.Int64, reflect.Int}, Output: reflect.Int},
 		Definition{Inputs: []interface{}{reflect.Int64, reflect.Int64}, Output: reflect.Int},
