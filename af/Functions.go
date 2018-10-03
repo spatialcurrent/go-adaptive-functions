@@ -11,6 +11,7 @@ package af
 var Functions = []Function{
 	Add,
 	Bottom,
+	BoundingBox,
 	Divide,
 	GetLength,
 	Flatten,
@@ -35,6 +36,7 @@ var Functions = []Function{
 	ToInt64,
 	ToFloat32,
 	ToFloat64,
+	ToFloat64Array,
 	ToItems,
 	ToKeys,
 	ToLittleEndian,

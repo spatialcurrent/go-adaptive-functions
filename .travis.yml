@@ -22,7 +22,5 @@ install:
   - gometalinter --install
 
 script:
-  - gometalinter --misspell-locale=US --disable-all --enable=misspell --enable=vet --enable=ineffassign --enable=gosec ./af/
-  - cd af
-  - go fmt
-  - go test
+  - scripts/format.sh
+  - scripts/test.sh

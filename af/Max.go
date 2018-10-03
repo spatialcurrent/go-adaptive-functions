@@ -60,6 +60,14 @@ func max(args []interface{}) (interface{}, error) {
 	}
 
 	switch arr := args[0].(type) {
+	case []uint8:
+		v := arr[0]
+		for i := 1; i < len(arr); i++ {
+			if arr[i] > v {
+				v = arr[i]
+			}
+		}
+		return v, nil
 	case []int:
 		v := arr[0]
 		for i := 1; i < len(arr); i++ {
@@ -96,6 +104,7 @@ var Max = Function{
 		Definition{Inputs: []interface{}{reflect.Int, reflect.Int}, Output: reflect.Int},
 		Definition{Inputs: []interface{}{reflect.Int64, reflect.Int64}, Output: reflect.Int64},
 		Definition{Inputs: []interface{}{reflect.Float64, reflect.Float64}, Output: reflect.Float64},
+		Definition{Inputs: []interface{}{uint8ArrayType}, Output: reflect.Uint8},
 		Definition{Inputs: []interface{}{intArrayType}, Output: reflect.Int},
 		Definition{Inputs: []interface{}{int64ArrayType}, Output: reflect.Int64},
 		Definition{Inputs: []interface{}{float64ArrayType}, Output: reflect.Float64},
