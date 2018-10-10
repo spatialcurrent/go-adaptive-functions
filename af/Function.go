@@ -17,6 +17,9 @@ type Function struct {
 
 // IsValid returns true if the arguments match a definition of the function.
 func (f Function) IsValid(args []interface{}) bool {
+	if len(f.Definitions) == 0 {
+		return true
+	}
 	for _, d := range f.Definitions {
 		if d.IsValid(args) {
 			return true

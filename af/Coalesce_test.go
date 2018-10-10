@@ -13,15 +13,13 @@ import (
 	"testing"
 )
 
-func TestToItems(t *testing.T) {
-
-	// TODO: need a way to test that a []interface{} and b []interface{} contains the same elements
-	ctx := map[string]interface{}{"a": 2}
+func TestCoalesce(t *testing.T) {
 
 	testCases := []TestCase{
-		NewTestCase([]interface{}{ctx}, ToItems, [][]interface{}{
-			[]interface{}{"a", 2},
-		}),
+		NewTestCase([]interface{}{1, 2}, Coalesce, 1),
+		NewTestCase([]interface{}{"", "0"}, Coalesce, "0"),
+		NewTestCase([]interface{}{nil, "0"}, Coalesce, "0"),
+		NewTestCase([]interface{}{false, "0"}, Coalesce, false),
 	}
 
 	for _, testCase := range testCases {

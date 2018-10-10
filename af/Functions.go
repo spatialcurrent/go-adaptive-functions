@@ -12,6 +12,7 @@ var Functions = []Function{
 	Add,
 	Bottom,
 	BoundingBox,
+	Coalesce,
 	Divide,
 	GetLength,
 	Flatten,

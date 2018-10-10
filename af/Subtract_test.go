@@ -13,6 +13,8 @@ import (
 	"testing"
 )
 
+type stringSet map[string]struct{}
+
 func TestSubtract(t *testing.T) {
 
 	testCases := []TestCase{
@@ -24,7 +26,16 @@ func TestSubtract(t *testing.T) {
 				map[string]string{"a": "d"},
 			},
 			Subtract,
-			map[string]string{"b": "y"}),
+			map[string]string{"b": "y"},
+		),
+		NewTestCase(
+			[]interface{}{
+				map[string]string{"a": "x", "b": "y"},
+				stringSet(map[string]struct{}{"a": struct{}{}}),
+			},
+			Subtract,
+			map[string]string{"b": "y"},
+		),
 	}
 
 	for _, testCase := range testCases {
