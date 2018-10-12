@@ -12,24 +12,24 @@ import (
 	"strings"
 )
 
-func toLower(args []interface{}) (interface{}, error) {
+func toTitle(args []interface{}) (interface{}, error) {
 
 	switch x := args[0].(type) {
 	case string:
-		return strings.ToLower(x), nil
+		return strings.Title(x), nil
 	case []byte:
-		return bytes.ToLower(x), nil
+		return bytes.Title(x), nil
 	}
 
-	return nil, &ErrorInvalidArguments{Function: "ToLower", Arguments: args}
+	return nil, &ErrorInvalidArguments{Function: "ToTitle", Arguments: args}
 }
 
-var ToLower = Function{
-	Name:    "ToLower",
-	Aliases: []string{"lower"},
+var ToTitle = Function{
+	Name:    "ToTitle",
+	Aliases: []string{"title"},
 	Definitions: []Definition{
 		Definition{Inputs: []interface{}{stringType}, Output: stringType},
 		Definition{Inputs: []interface{}{byteArrayType}, Output: byteArrayType},
 	},
-	Function: toLower,
+	Function: toTitle,
 }

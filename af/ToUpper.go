@@ -8,6 +8,7 @@
 package af
 
 import (
+	"bytes"
 	"strings"
 )
 
@@ -16,6 +17,8 @@ func toUpper(args []interface{}) (interface{}, error) {
 	switch x := args[0].(type) {
 	case string:
 		return strings.ToUpper(x), nil
+	case []byte:
+		return bytes.ToUpper(x), nil
 	}
 
 	return nil, &ErrorInvalidArguments{Function: "ToUpper", Arguments: args}
@@ -26,6 +29,7 @@ var ToUpper = Function{
 	Aliases: []string{"upper"},
 	Definitions: []Definition{
 		Definition{Inputs: []interface{}{stringType}, Output: stringType},
+		Definition{Inputs: []interface{}{byteArrayType}, Output: byteArrayType},
 	},
 	Function: toUpper,
 }
