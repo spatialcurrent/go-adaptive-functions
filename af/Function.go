@@ -10,9 +10,19 @@ package af
 // Function is a struct used for giving an underlying function a name and definitions.
 type Function struct {
 	Name        string                                        // the name of the function
+	Description string                                        // a description of the function
 	Aliases     []string                                      // aliases for the function used when providing a public API
 	Definitions []Definition                                  // the definitions of the function
 	Function    func(args []interface{}) (interface{}, error) // the underlying function to execute
+}
+
+// Map returns a map of metadata about the function.
+func (f Function) Map() map[string]interface{} {
+	return map[string]interface{}{
+		"name":        f.Name,
+		"description": f.Description,
+		"aliases":     f.Aliases,
+	}
 }
 
 // IsValid returns true if the arguments match a definition of the function.

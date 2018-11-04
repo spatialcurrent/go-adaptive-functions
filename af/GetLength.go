@@ -19,7 +19,7 @@ func getLength(args []interface{}) (interface{}, error) {
 
 	t := reflect.TypeOf(args[0])
 
-	if !(t.Kind() == reflect.Array || t.Kind() == reflect.Slice || t.Kind() == reflect.String) {
+	if !(t.Kind() == reflect.Array || t.Kind() == reflect.Slice || t.Kind() == reflect.Map || t.Kind() == reflect.String) {
 		return nil, &ErrorInvalidArguments{Function: "GetLength", Arguments: args}
 	}
 
@@ -37,6 +37,10 @@ var GetLength = Function{
 		},
 		Definition{
 			Inputs: []interface{}{reflect.Slice},
+			Output: reflect.Int,
+		},
+		Definition{
+			Inputs: []interface{}{reflect.Map},
 			Output: reflect.Int,
 		},
 		Definition{
