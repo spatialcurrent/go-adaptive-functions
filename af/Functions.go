@@ -17,6 +17,8 @@ var Functions = []Function{
 	First,
 	Flatten,
 	GetLength,
+	In,
+	IIn,
 	Intersects,
 	Last,
 	Limit,

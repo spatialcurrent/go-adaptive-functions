@@ -8,6 +8,7 @@
 package af
 
 import (
+	"net"
 	"reflect"
 )
 
@@ -48,3 +49,7 @@ var intSetType = reflect.TypeOf(map[int]struct{}{})
 var interfaceSetType = reflect.TypeOf(map[interface{}]struct{}{})
 
 var stringIntMapType = reflect.TypeOf(map[string]int{})
+
+var ipType = reflect.TypeOf(net.IP([]byte{}))
+var ipNetType = reflect.TypeOf(net.IPNet{})
+var ipNetPtrType = reflect.TypeOf(&net.IPNet{})
