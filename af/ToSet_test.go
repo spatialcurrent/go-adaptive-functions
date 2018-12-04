@@ -15,10 +15,19 @@ import (
 
 func TestToSet(t *testing.T) {
 
-	ctx := []string{"a", "b"}
-
 	testCases := []TestCase{
-		NewTestCase([]interface{}{ctx}, ToSet, map[string]struct{}{"a": struct{}{}, "b": struct{}{}}),
+		NewTestCase(
+			[]interface{}{[]string{"a", "b"}},
+			ToSet,
+			map[string]struct{}{"a": struct{}{}, "b": struct{}{}}),
+		NewTestCase(
+			[]interface{}{map[string]struct{}{"a": struct{}{}, "b": struct{}{}}},
+			ToSet,
+			map[string]struct{}{"a": struct{}{}, "b": struct{}{}}),
+		NewTestCase(
+			[]interface{}{map[string]interface{}{"a": 1, "b": 2}},
+			ToSet,
+			map[string]struct{}{"a": struct{}{}, "b": struct{}{}}),
 	}
 
 	for _, testCase := range testCases {
