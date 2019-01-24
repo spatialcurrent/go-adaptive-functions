@@ -67,7 +67,7 @@ func add(args []interface{}) (interface{}, error) {
 	}
 
 	if at.Kind() == reflect.Array || at.Kind() == reflect.Slice {
-		if at.Elem().AssignableTo(bt.Elem()) {
+		if !at.Elem().AssignableTo(bt.Elem()) {
 			return nil, &ErrorInvalidArguments{Function: "Add", Arguments: args}
 		}
 		av := reflect.ValueOf(a)

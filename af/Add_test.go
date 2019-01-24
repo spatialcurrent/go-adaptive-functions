@@ -25,6 +25,13 @@ func TestAdd(t *testing.T) {
 			},
 			Add,
 			map[string]string{"a": "d", "b": "y"}),
+		NewTestCase(
+			[]interface{}{
+				[]uint8{uint8(0), uint8(1), uint8(2)},
+				[]uint8{uint8(3), uint8(4), uint8(5)},
+			},
+			Add,
+			[]uint8{uint8(0), uint8(1), uint8(2), uint8(3), uint8(4), uint8(5)}),
 	}
 
 	for _, testCase := range testCases {
