@@ -20,6 +20,7 @@ var Functions = []Function{
 	In,
 	IIn,
 	Intersects,
+	Join,
 	Last,
 	Limit,
 	Lookup,
@@ -30,6 +31,8 @@ var Functions = []Function{
 	Prefix,
 	Pow,
 	Repeat,
+	Replace,
+	Second,
 	Split,
 	Sort,
 	Subtract,
@@ -58,4 +61,5 @@ var Functions = []Function{
 	Top,
 	ToUpper,
 	ToValues,
+	Trim,
 }
