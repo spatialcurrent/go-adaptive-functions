@@ -57,6 +57,7 @@ var Functions = []Function{
 	ToLower,
 	ToSet,
 	ToString,
+	ToStringSet,
 	ToTitle,
 	Top,
 	ToUpper,

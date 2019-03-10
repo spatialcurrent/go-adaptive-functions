@@ -13,27 +13,21 @@ import (
 	"testing"
 )
 
-func TestSubtract(t *testing.T) {
+func TestToStringSet(t *testing.T) {
 
 	testCases := []TestCase{
-		NewTestCase([]interface{}{1, 2}, Subtract, -1),
-		NewTestCase([]interface{}{4, 2.0}, Subtract, 2.0),
 		NewTestCase(
-			[]interface{}{
-				map[string]string{"a": "x", "b": "y"},
-				map[string]string{"a": "d"},
-			},
-			Subtract,
-			map[string]string{"b": "y"},
-		),
+			[]interface{}{[]interface{}{"a", 1}},
+			ToStringSet,
+			map[string]struct{}{"a": struct{}{}, "1": struct{}{}}),
 		NewTestCase(
-			[]interface{}{
-				map[string]string{"a": "x", "b": "y"},
-				map[string]struct{}{"a": struct{}{}},
-			},
-			Subtract,
-			map[string]string{"b": "y"},
-		),
+			[]interface{}{map[interface{}]struct{}{"a": struct{}{}, 1: struct{}{}}},
+			ToStringSet,
+			map[string]struct{}{"a": struct{}{}, "1": struct{}{}}),
+		NewTestCase(
+			[]interface{}{map[string]interface{}{"a": 1, "b": 2}},
+			ToStringSet,
+			map[string]struct{}{"a": struct{}{}, "b": struct{}{}}),
 	}
 
 	for _, testCase := range testCases {

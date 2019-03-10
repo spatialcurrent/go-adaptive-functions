@@ -13,27 +13,12 @@ import (
 	"testing"
 )
 
-func TestSubtract(t *testing.T) {
+func TestSecond(t *testing.T) {
 
 	testCases := []TestCase{
-		NewTestCase([]interface{}{1, 2}, Subtract, -1),
-		NewTestCase([]interface{}{4, 2.0}, Subtract, 2.0),
-		NewTestCase(
-			[]interface{}{
-				map[string]string{"a": "x", "b": "y"},
-				map[string]string{"a": "d"},
-			},
-			Subtract,
-			map[string]string{"b": "y"},
-		),
-		NewTestCase(
-			[]interface{}{
-				map[string]string{"a": "x", "b": "y"},
-				map[string]struct{}{"a": struct{}{}},
-			},
-			Subtract,
-			map[string]string{"b": "y"},
-		),
+		NewTestCase([]interface{}{[]int{4, 2}}, Second, 2),
+		NewTestCase([]interface{}{[]float64{4.12, 2.22}}, Second, 2.22),
+		NewTestCase([]interface{}{[]string{"a", "b"}}, Second, "b"),
 	}
 
 	for _, testCase := range testCases {
