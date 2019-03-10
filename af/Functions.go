@@ -16,6 +16,7 @@ var Functions = []Function{
 	Divide,
 	First,
 	Flatten,
+	Fold,
 	GetLength,
 	In,
 	IIn,
