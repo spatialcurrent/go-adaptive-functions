@@ -18,6 +18,13 @@ func first(args []interface{}) (interface{}, error) {
 	}
 
 	k := reflect.TypeOf(args[0]).Kind()
+	if k == reflect.Map {
+		if v := reflect.ValueOf(args[0]); v.Len() > 0 {
+			return v.MapKeys()[0].Interface(), nil
+		}
+		return nil, &ErrorInvalidArguments{Function: "First", Arguments: args}
+	}
+
 	if !(k == reflect.Array || k == reflect.Slice || k == reflect.String) {
 		return nil, &ErrorInvalidArguments{Function: "First", Arguments: args}
 	}
@@ -43,6 +50,7 @@ var First = Function{
 		Definition{Inputs: []interface{}{stringIntMapSliceType}, Output: stringIntMapType},
 		Definition{Inputs: []interface{}{interfaceArrayType}, Output: nil},
 		Definition{Inputs: []interface{}{reflect.String}, Output: reflect.Uint8},
+		Definition{Inputs: []interface{}{reflect.Map}, Output: nil},
 	},
 	Function: first,
 }

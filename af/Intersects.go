@@ -26,8 +26,7 @@ var Intersects = Function{
 	Name:    "intersects",
 	Aliases: []string{"intersects"},
 	Definitions: []Definition{
-		Definition{Inputs: []interface{}{stringSetType, stringSetType}, Output: boolType},
-		Definition{Inputs: []interface{}{intSetType, intSetType}, Output: boolType},
+		Definition{Inputs: []interface{}{reflect.Map, reflect.Map}, Output: boolType},
 	},
 	Function: intersects,
 }
