@@ -1,0 +1,36 @@
+// =================================================================
+//
+// Copyright (C) 2019 Spatial Current, Inc. - All Rights Reserved
+// Released as open source under the MIT License.  See LICENSE file.
+//
+// =================================================================
+
+package af
+
+import (
+	"reflect"
+	"strings"
+	"time"
+)
+
+func format(args []interface{}) (interface{}, error) {
+	switch x := args[0].(type) {
+	case time.Time:
+		if str, ok := args[1].(string); ok {
+			str = strings.ReplaceAll(str, "yyyy", "2006")
+			str = strings.ReplaceAll(str, "mm", "01")
+			str = strings.ReplaceAll(str, "dd", "02")
+			return x.Format(str), nil
+		}
+	}
+	return nil, &ErrorInvalidArguments{Function: "Format", Arguments: args}
+}
+
+var Format = Function{
+	Name:    "Format",
+	Aliases: []string{"format"},
+	Definitions: []Definition{
+		Definition{Inputs: []interface{}{timeType, reflect.String}, Output: reflect.String},
+	},
+	Function: format,
+}

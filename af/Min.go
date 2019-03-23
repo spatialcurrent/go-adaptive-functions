@@ -9,6 +9,7 @@ package af
 
 import (
 	"reflect"
+	"time"
 )
 
 func min(args []interface{}) (interface{}, error) {
@@ -47,6 +48,15 @@ func min(args []interface{}) (interface{}, error) {
 				return a, nil
 			}
 			return b, nil
+		case time.Time:
+			bv, ok := b.(time.Time)
+			if !ok {
+				return nil, &ErrorInvalidArguments{Function: "Min", Arguments: args}
+			}
+			if av.Before(bv) {
+				return av, nil
+			}
+			return bv, nil
 		}
 
 		return nil, &ErrorInvalidArguments{Function: "Min", Arguments: args}
@@ -96,6 +106,7 @@ var Min = Function{
 		Definition{Inputs: []interface{}{reflect.Int, reflect.Int}, Output: reflect.Int},
 		Definition{Inputs: []interface{}{reflect.Int64, reflect.Int64}, Output: reflect.Int64},
 		Definition{Inputs: []interface{}{reflect.Float64, reflect.Float64}, Output: reflect.Float64},
+		Definition{Inputs: []interface{}{timeType, timeType}, Output: timeType},
 		Definition{Inputs: []interface{}{intArrayType}, Output: reflect.Int},
 		Definition{Inputs: []interface{}{int64ArrayType}, Output: reflect.Int64},
 		Definition{Inputs: []interface{}{float64ArrayType}, Output: reflect.Float64},

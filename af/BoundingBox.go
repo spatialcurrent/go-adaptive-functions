@@ -48,12 +48,12 @@ func boundingBox(args []interface{}) (interface{}, error) {
 
 	xt := reflect.TypeOf(x)
 	if !xt.ConvertibleTo(float64Type) {
-		return nil, &ErrorInvalidArguments{Function: "Float64Array", Arguments: args}
+		return nil, &ErrorInvalidArguments{Function: "BoundingBox", Arguments: args}
 	}
 
 	yt := reflect.TypeOf(y)
 	if !yt.ConvertibleTo(float64Type) {
-		return nil, &ErrorInvalidArguments{Function: "Float64Array", Arguments: args}
+		return nil, &ErrorInvalidArguments{Function: "BoundingBox", Arguments: args}
 	}
 
 	xf := reflect.ValueOf(x).Convert(float64Type).Interface().(float64)
@@ -79,12 +79,12 @@ func boundingBox(args []interface{}) (interface{}, error) {
 
 		xt := reflect.TypeOf(x)
 		if !xt.ConvertibleTo(float64Type) {
-			return nil, &ErrorInvalidArguments{Function: "Float64Array", Arguments: args}
+			return nil, &ErrorInvalidArguments{Function: "BoundingBox", Arguments: args}
 		}
 
 		yt := reflect.TypeOf(y)
 		if !yt.ConvertibleTo(float64Type) {
-			return nil, &ErrorInvalidArguments{Function: "Float64Array", Arguments: args}
+			return nil, &ErrorInvalidArguments{Function: "BoundingBox", Arguments: args}
 		}
 
 		xf := reflect.ValueOf(x).Convert(float64Type).Interface().(float64)

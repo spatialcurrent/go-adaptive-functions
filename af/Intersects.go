@@ -12,14 +12,31 @@ import (
 )
 
 func intersects(args []interface{}) (interface{}, error) {
-	av := reflect.ValueOf(args[0])
-	bv := reflect.ValueOf(args[1])
-	for _, v := range bv.MapKeys() {
-		if av.MapIndex(v).IsValid() {
-			return true, nil
+
+	if len(args) != 2 {
+		return nil, &ErrorInvalidArguments{Function: "Intersects", Arguments: args}
+	}
+
+	at := reflect.TypeOf(args[0])
+	bt := reflect.TypeOf(args[0])
+	if at.Kind() == reflect.Map && bt.Kind() == reflect.Map {
+		av := reflect.ValueOf(args[0])
+		bv := reflect.ValueOf(args[1])
+		for _, v := range bv.MapKeys() {
+			if av.MapIndex(v).IsValid() {
+				return true, nil
+			}
+		}
+		return false, nil
+	}
+
+	if av, ok := args[0].([]float64); ok && len(av) == 4 {
+		if bv, ok := args[1].([]float64); ok && len(bv) == 4 {
+			return av[0] < bv[2] && av[2] > bv[0] && av[3] > bv[1] && av[1] < bv[3], nil
 		}
 	}
-	return false, nil
+
+	return nil, &ErrorInvalidArguments{Function: "Intersects", Arguments: args}
 }
 
 var Intersects = Function{
@@ -27,6 +44,7 @@ var Intersects = Function{
 	Aliases: []string{"intersects"},
 	Definitions: []Definition{
 		Definition{Inputs: []interface{}{reflect.Map, reflect.Map}, Output: boolType},
+		Definition{Inputs: []interface{}{float64ArrayType, float64ArrayType}, Output: boolType},
 	},
 	Function: intersects,
 }

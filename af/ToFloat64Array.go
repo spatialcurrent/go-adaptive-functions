@@ -9,6 +9,7 @@ package af
 
 import (
 	"reflect"
+	"strconv"
 )
 
 func float64Array(args []interface{}) (interface{}, error) {
@@ -29,11 +30,19 @@ func float64Array(args []interface{}) (interface{}, error) {
 	arr := make([]float64, 0, l)
 	for i := 0; i < l; i++ {
 		x := v.Index(i).Interface()
-		xt := reflect.TypeOf(x)
-		if !xt.ConvertibleTo(float64Type) {
-			return nil, &ErrorInvalidArguments{Function: "Float64Array", Arguments: args}
+		if xs, ok := x.(string); ok {
+			xv, err := strconv.ParseFloat(xs, 64)
+			if err != nil {
+				return nil, &ErrorInvalidArguments{Function: "Float64Array", Arguments: args}
+			}
+			arr = append(arr, xv)
+		} else {
+			xt := reflect.TypeOf(x)
+			if !xt.ConvertibleTo(float64Type) {
+				return nil, &ErrorInvalidArguments{Function: "Float64Array", Arguments: args}
+			}
+			arr = append(arr, reflect.ValueOf(x).Convert(float64Type).Interface().(float64))
 		}
-		arr = append(arr, reflect.ValueOf(x).Convert(float64Type).Interface().(float64))
 	}
 
 	return arr, nil

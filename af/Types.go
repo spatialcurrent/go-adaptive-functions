@@ -10,6 +10,7 @@ package af
 import (
 	"net"
 	"reflect"
+	"time"
 )
 
 var interfaceType = reflect.TypeOf(map[string]interface{}{}).Elem()
@@ -53,3 +54,5 @@ var stringIntMapType = reflect.TypeOf(map[string]int{})
 var ipType = reflect.TypeOf(net.IP([]byte{}))
 var ipNetType = reflect.TypeOf(net.IPNet{})
 var ipNetPtrType = reflect.TypeOf(&net.IPNet{})
+
+var timeType = reflect.TypeOf(time.Time{})
