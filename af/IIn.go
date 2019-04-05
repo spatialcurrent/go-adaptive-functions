@@ -34,7 +34,7 @@ func iin(args []interface{}) (interface{}, error) {
 
 		} else if bt.Kind() == reflect.Map {
 
-			if !bt.Key().AssignableTo(at) {
+			if !at.AssignableTo(bt.Key()) {
 				return false, &ErrorInvalidArguments{Function: "IIn", Arguments: args}
 			}
 

@@ -30,7 +30,7 @@ func (d Definition) IsValid(args []interface{}) bool {
 				return false
 			}
 		case reflect.Kind:
-			if reflect.TypeOf(a).Kind() != x {
+			if xv := reflect.ValueOf(x); xv.IsValid() && reflect.TypeOf(a).Kind() != x {
 				return false
 			}
 		}

@@ -13,7 +13,7 @@ import (
 
 func lookup(args []interface{}) (interface{}, error) {
 
-	if len(args) != 2 {
+	if len(args) != 2 && len(args) != 3 {
 		return nil, &ErrorInvalidArguments{Function: "Lookup", Arguments: args}
 	}
 
@@ -31,8 +31,12 @@ func lookup(args []interface{}) (interface{}, error) {
 
 		cv := reflect.ValueOf(a).MapIndex(reflect.ValueOf(b).Convert(at.Key()))
 		if !cv.IsValid() {
+			if len(args) == 3 {
+				return args[2], nil
+			}
 			return nil, nil
 		}
+
 		return cv.Interface(), nil
 
 	} else if at.Kind() == reflect.Array || at.Kind() == reflect.Slice {
@@ -61,8 +65,11 @@ var Lookup = Function{
 	Aliases: []string{"lookup"},
 	Definitions: []Definition{
 		Definition{Inputs: []interface{}{reflect.Array, nil}, Output: nil},
+		Definition{Inputs: []interface{}{reflect.Array, nil, nil}, Output: nil},
 		Definition{Inputs: []interface{}{reflect.Slice, nil}, Output: nil},
+		Definition{Inputs: []interface{}{reflect.Slice, nil, nil}, Output: nil},
 		Definition{Inputs: []interface{}{reflect.Map, nil}, Output: nil},
+		Definition{Inputs: []interface{}{reflect.Map, nil, nil}, Output: nil},
 	},
 	Function: lookup,
 }

@@ -34,8 +34,13 @@ func coalesce(args []interface{}) (interface{}, error) {
 		v := values.Index(i)
 		if v.IsValid() && (!v.IsNil()) {
 			vi := v.Interface()
-			if vk := reflect.TypeOf(vi).Kind(); vk == reflect.Array || vk == reflect.Slice || vk == reflect.String {
-				if reflect.ValueOf(vi).Len() == 0 {
+			vk := reflect.TypeOf(vi).Kind()
+			if vk == reflect.Array || vk == reflect.Slice || vk == reflect.Map {
+				if viv := reflect.ValueOf(vi); viv.IsNil() || viv.Len() == 0 {
+					continue
+				}
+			} else if vk == reflect.String {
+				if viv := reflect.ValueOf(vi); viv.Len() == 0 {
 					continue
 				}
 			}
