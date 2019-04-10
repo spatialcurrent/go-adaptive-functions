@@ -32,7 +32,7 @@ func (d Definition) IsValid(args []interface{}) bool {
 				if !av.IsValid() {
 					return false
 				}
-				if ak := reflect.TypeOf(a).Kind(); ak != reflect.String && ak != reflect.Array && ak != reflect.Slice && ak != reflect.Struct && av.IsNil() {
+				if ak := reflect.TypeOf(a).Kind(); (ak == reflect.Chan || ak == reflect.Func || ak == reflect.Map || ak == reflect.Ptr || ak == reflect.Slice) && av.IsNil() {
 					return false
 				}
 				if !av.Type().AssignableTo(x) {
