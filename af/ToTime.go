@@ -30,6 +30,14 @@ func toTime(args []interface{}) (interface{}, error) {
 		if err == nil {
 			return t, nil
 		}
+		t, err = time.Parse("15:04:05 UTC", x)
+		if err == nil {
+			return t, nil
+		}
+		t, err = time.Parse("15:04", x)
+		if err == nil {
+			return t, nil
+		}
 	case time.Time:
 		return x, nil
 	}

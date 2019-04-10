@@ -26,8 +26,18 @@ func (d Definition) IsValid(args []interface{}) bool {
 	for i, a := range args {
 		switch x := d.Inputs[i].(type) {
 		case reflect.Type:
-			if !reflect.TypeOf(a).AssignableTo(x) {
-				return false
+			xv := reflect.ValueOf(x)
+			av := reflect.ValueOf(a)
+			if !xv.IsNil() {
+				if !av.IsValid() {
+					return false
+				}
+				if ak := reflect.TypeOf(a).Kind(); ak != reflect.String && ak != reflect.Array && ak != reflect.Slice && ak != reflect.Struct && av.IsNil() {
+					return false
+				}
+				if !av.Type().AssignableTo(x) {
+					return false
+				}
 			}
 		case reflect.Kind:
 			if xv := reflect.ValueOf(x); xv.IsValid() && reflect.TypeOf(a).Kind() != x {

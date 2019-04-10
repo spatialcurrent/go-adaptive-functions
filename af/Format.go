@@ -17,9 +17,12 @@ func format(args []interface{}) (interface{}, error) {
 	switch x := args[0].(type) {
 	case time.Time:
 		if str, ok := args[1].(string); ok {
-			str = strings.ReplaceAll(str, "yyyy", "2006")
-			str = strings.ReplaceAll(str, "mm", "01")
-			str = strings.ReplaceAll(str, "dd", "02")
+			str = strings.ReplaceAll(str, "YYYY", "2006")
+			str = strings.ReplaceAll(str, "MM", "01")
+			str = strings.ReplaceAll(str, "DD", "02")
+			str = strings.ReplaceAll(str, "h", "3")
+			str = strings.ReplaceAll(str, "hh", "15")
+			str = strings.ReplaceAll(str, "mm", "04")
 			return x.Format(str), nil
 		}
 	}
