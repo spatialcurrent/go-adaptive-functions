@@ -12,26 +12,25 @@ import (
 	"strings"
 )
 
-func split(args []interface{}) (interface{}, error) {
-
-	t0 := reflect.TypeOf(args[0])
-	t1 := reflect.TypeOf(args[0])
-
-	if t0.Kind() == reflect.String {
-		if t1.Kind() == reflect.String {
-			return strings.Split(args[0].(string), args[1].(string)), nil
-		}
-	}
-
-	return nil, &ErrorInvalidArguments{Function: "Split", Arguments: args}
-
-}
-
 var Split = Function{
 	Name:    "Split",
 	Aliases: []string{"split"},
 	Definitions: []Definition{
 		Definition{Inputs: []interface{}{stringType, stringType}, Output: reflect.Slice},
+		Definition{Inputs: []interface{}{stringType, stringType, intType}, Output: reflect.Slice},
 	},
-	Function: split,
+	Function: func(args []interface{}) (interface{}, error) {
+		if str, ok := args[0].(string); ok {
+			if delim, ok := args[1].(string); ok {
+				if len(args) == 2 {
+					return strings.Split(str, delim), nil
+				} else if len(args) == 3 {
+					if n, ok := args[2].(int); ok {
+						return strings.SplitN(str, delim, n), nil
+					}
+				}
+			}
+		}
+		return nil, &ErrorInvalidArguments{Function: "Split", Arguments: args}
+	},
 }

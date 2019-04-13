@@ -10,8 +10,10 @@ package af
 // Functions is an array of all the adapative functions defined in this package.
 var Functions = []Function{
 	Add,
+	Base,
 	Bottom,
 	BoundingBox,
+	Clean,
 	Coalesce,
 	Concat,
 	Divide,
@@ -37,6 +39,7 @@ var Functions = []Function{
 	Repeat,
 	Replace,
 	Second,
+	Slice,
 	Split,
 	Sort,
 	Subtract,
@@ -68,4 +71,5 @@ var Functions = []Function{
 	ToUpper,
 	ToValues,
 	Trim,
+	Within,
 }
