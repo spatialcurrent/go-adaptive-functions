@@ -26,6 +26,7 @@ var Functions = []Function{
 	IIn,
 	Intersects,
 	Join,
+	Json,
 	Last,
 	Limit,
 	Lookup,
