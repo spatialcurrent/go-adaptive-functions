@@ -91,10 +91,14 @@ func iin(args []interface{}) (interface{}, error) {
 			return false, nil
 		}
 
-		for i, _ := range bv {
+		// iterate over every index in bv
+		for i := range bv {
+			//lint:ignore SA6005 we do not fold here as that is handled by its own function
 			if strings.ToLower(bv[i]) == strings.ToLower(av[0]) && i+len(av) < len(bv) {
 				match := true
-				for j, _ := range av {
+				// iterate over every index in av
+				for j := range av {
+					//lint:ignore SA6005 we do not fold here as that is handled by its own function
 					if strings.ToLower(bv[i+j]) != strings.ToLower(av[j]) {
 						match = false
 						break

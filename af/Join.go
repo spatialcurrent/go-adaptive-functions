@@ -34,7 +34,7 @@ func join(args []interface{}) (interface{}, error) {
 		}
 		if a, ok := args[0].(map[string]struct{}); ok {
 			keys := make([]string, 0, len(a))
-			for key, _ := range a {
+			for key := range a {
 				keys = append(keys, key)
 			}
 			return strings.Join(keys, b), nil

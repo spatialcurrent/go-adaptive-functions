@@ -52,10 +52,10 @@ func in(args []interface{}) (interface{}, error) {
 			return false, nil
 		}
 
-		for i, _ := range bv {
+		for i := range bv {
 			if bv[i] == av[0] && i+len(av) < len(bv) {
 				match := true
-				for j, _ := range av {
+				for j := range av {
 					if bv[i+j] != av[j] {
 						match = false
 						break
@@ -78,10 +78,12 @@ func in(args []interface{}) (interface{}, error) {
 			return false, nil
 		}
 
-		for i, _ := range bv {
+		// iterate over every index in bv
+		for i := range bv {
 			if bv[i] == av[0] && i+len(av) < len(bv) {
 				match := true
-				for j, _ := range av {
+				// iterate over every index in av
+				for j := range av {
 					if bv[i+j] != av[j] {
 						match = false
 						break
@@ -104,10 +106,12 @@ func in(args []interface{}) (interface{}, error) {
 			return false, nil
 		}
 
-		for i, _ := range bv {
+		// iterate over every index in bv
+		for i := range bv {
 			if bv[i] == av[0] && i+len(av) < len(bv) {
 				match := true
-				for j, _ := range av {
+				// iterate over every index in av
+				for j := range av {
 					if bv[i+j] != av[j] {
 						match = false
 						break

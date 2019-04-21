@@ -16,11 +16,11 @@ func tileY(args []interface{}) (interface{}, error) {
 	case int:
 		switch lat := args[0].(type) {
 		case int:
-			lat_rad := float64(lat) * math.Pi / 180.0
-			return int((1.0 - math.Log(math.Tan(lat_rad)+(1/math.Cos(lat_rad)))/math.Pi) / 2.0 * math.Pow(float64(2), float64(z))), nil
+			latRad := float64(lat) * math.Pi / 180.0
+			return int((1.0 - math.Log(math.Tan(latRad)+(1/math.Cos(latRad)))/math.Pi) / 2.0 * math.Pow(float64(2), float64(z))), nil
 		case float64:
-			lat_rad := lat * math.Pi / 180.0
-			return int((1.0 - math.Log(math.Tan(lat_rad)+(1/math.Cos(lat_rad)))/math.Pi) / 2.0 * math.Pow(float64(2), float64(z))), nil
+			latRad := lat * math.Pi / 180.0
+			return int((1.0 - math.Log(math.Tan(latRad)+(1/math.Cos(latRad)))/math.Pi) / 2.0 * math.Pow(float64(2), float64(z))), nil
 		}
 	}
 	return nil, &ErrorInvalidArguments{Function: "TileY", Arguments: args}

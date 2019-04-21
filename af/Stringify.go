@@ -8,28 +8,19 @@
 package af
 
 import (
-	"encoding/json"
-	"reflect"
+	stringify "github.com/spatialcurrent/go-stringify"
 )
 
-import (
-	"github.com/pkg/errors"
-)
-
-var Json = Function{
-	Name:    "json",
-	Aliases: []string{"json"},
+var Stringify = Function{
+	Name:    "Stringify",
+	Aliases: []string{"stringify"},
 	Definitions: []Definition{
-		Definition{Inputs: []interface{}{nil}, Output: reflect.String},
+		Definition{Inputs: []interface{}{nil}, Output: nil},
 	},
 	Function: func(args []interface{}) (interface{}, error) {
 		if len(args) != 1 {
-			return nil, &ErrorInvalidArguments{Function: "Json", Arguments: args}
+			return nil, &ErrorInvalidArguments{Function: "Stringify", Arguments: args}
 		}
-		out, err := json.Marshal(args[0])
-		if err != nil {
-			return err, errors.Wrap(err, "error marshalling to json")
-		}
-		return out, nil
+		return stringify.StringifyMapKeys(args[0]), nil
 	},
 }
