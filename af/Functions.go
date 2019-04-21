@@ -52,6 +52,7 @@ var Functions = []Function{
 	ToArray,
 	ToBigEndian,
 	ToBytes,
+	ToInt,
 	ToInt8,
 	ToInt16,
 	ToInt32,
