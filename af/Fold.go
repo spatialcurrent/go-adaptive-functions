@@ -24,6 +24,8 @@ func fold(args []interface{}) (interface{}, error) {
 			switch c {
 			case 'á':
 				b.WriteRune('a') // #nosec
+			case 'í':
+				b.WriteRune('i') // #nosec
 			case 'ř':
 				b.WriteRune('r') // #nosec
 			case 'ý':
