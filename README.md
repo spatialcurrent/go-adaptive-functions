@@ -4,7 +4,7 @@
 
 # Description
 
-**go-adaptive-functions** is a library of adaptive Go functions used by [go-adaptive-functions](https://github.com/spatialcurrent/go-adaptive-functions).
+**go-adaptive-functions** is a library of adaptive Go functions used by [gotmpl](https://github.com/spatialcurrent/gotmpl), [go-dfl](https://github.com/spatialcurrent/go-dfl) and [railgun](https://github.com/spatialcurrent/railgun).
 
 # Usage
 
@@ -14,11 +14,11 @@ You can import **go-adaptive-functions** as a library with:
 
 ```
 import (
-  "github.com/spatialcurrent/go-adaptive-functions/af"
+  "github.com/spatialcurrent/go-adaptive-functions/pkg/af"
 )
 ```
 
-See [af](https://godoc.org/github.com/spatialcurrent/go-adaptive-functions/af) in GoDoc for information on how to use Go API.
+See [af](https://godoc.org/github.com/spatialcurrent/go-adaptive-functions/pkg/af) in GoDoc for information on how to use Go API.
 
 # Contributing
 
@@ -26,7 +26,7 @@ See [af](https://godoc.org/github.com/spatialcurrent/go-adaptive-functions/af) i
 
 # Testing
 
-Run test using `bash scripts/test.sh`, which runs unit tests, `go vet`, `go vet with shadow`, [errcheck](https://github.com/kisielk/errcheck), [ineffassign](https://github.com/gordonklaus/ineffassign), [staticcheck](https://staticcheck.io/), and [misspell](https://github.com/client9/misspell).
+Run test using `make test` (or `bash scripts/test.sh`), which runs unit tests, `go vet`, `go vet with shadow`, [errcheck](https://github.com/kisielk/errcheck), [ineffassign](https://github.com/gordonklaus/ineffassign), [staticcheck](https://staticcheck.io/), and [misspell](https://github.com/client9/misspell).
 
 # License
 
