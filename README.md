@@ -57,7 +57,7 @@ Use `make help` to see help information for each target.
 
 **JavaScript**
 
-You can compile GSS to pure JavaScript with the `make build_javascript` script.
+You can compile go-adaptive-functions to pure JavaScript with the `make build_javascript` script.
 
 # Testing
 
