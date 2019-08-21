@@ -11,6 +11,7 @@ package afjs
 
 import (
 	"github.com/gopherjs/gopherjs/js"
+
 	"github.com/spatialcurrent/go-adaptive-functions/pkg/af"
 )
 
@@ -34,8 +35,8 @@ func parseObject(object *js.Object) interface{} {
 }
 
 func exports() map[string]interface{} {
-  m := map[string]interface{}{}
-  for _, fn := range af.Functions {
+	m := map[string]interface{}{}
+	for _, fn := range af.Functions {
 		func(fn af.Function) {
 			for _, alias := range fn.Aliases {
 				m[alias] = func(objects ...*js.Object) map[string]interface{} {
