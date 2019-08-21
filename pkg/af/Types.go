@@ -37,7 +37,7 @@ var float32Type = reflect.TypeOf(float32(0.0))
 var float64Type = reflect.TypeOf(0.0)
 
 var byteSliceType = reflect.TypeOf([]byte{})
-var byte2DSliceType = reflect.TypeOf([][]byte{})
+//var byte2DSliceType = reflect.TypeOf([][]byte{})
 
 var uint8SliceType = reflect.TypeOf([]uint8{})
 var uint82DSliceType = reflect.TypeOf([][]uint8{})
@@ -49,11 +49,11 @@ var int64ArrayType = reflect.TypeOf([]int64{})
 var float64ArrayType = reflect.TypeOf([]float64{})
 var stringIntMapSliceType = reflect.TypeOf([]map[string]int{})
 var interfaceArrayType = reflect.TypeOf([]interface{}{})
-var interface2DArrayType = reflect.TypeOf([][]interface{}{})
+//var interface2DArrayType = reflect.TypeOf([][]interface{}{})
 
 var stringSetType = reflect.TypeOf(map[string]struct{}{})
-var intSetType = reflect.TypeOf(map[int]struct{}{})
-var interfaceSetType = reflect.TypeOf(map[interface{}]struct{}{})
+//var intSetType = reflect.TypeOf(map[int]struct{}{})
+//var interfaceSetType = reflect.TypeOf(map[interface{}]struct{}{})
 
 var stringIntMapType = reflect.TypeOf(map[string]int{})
 
