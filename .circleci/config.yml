@@ -33,6 +33,3 @@ workflows:
       - test:
           requires:
             - pre_deps_golang
-      - validate:
-          requires:
-            - pre_deps_golang
