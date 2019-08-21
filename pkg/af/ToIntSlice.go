@@ -8,8 +8,8 @@
 package af
 
 import (
-	"fmt"
 	"reflect"
+	"strconv"
 )
 
 func intArray(args ...interface{}) (interface{}, error) {
@@ -28,23 +28,30 @@ func intArray(args ...interface{}) (interface{}, error) {
 	arr := make([]int, 0, l)
 	for i := 0; i < l; i++ {
 		x := v.Index(i).Interface()
-		xt := reflect.TypeOf(x)
-		if !xt.ConvertibleTo(intType) {
-			fmt.Println("xt:", xt)
-			return nil, &ErrInvalidArguments{Function: "IntArray", Arguments: args}
+		if xs, ok := x.(string); ok {
+			xv, err := strconv.Atoi(xs)
+			if err != nil {
+				return nil, &ErrInvalidArguments{Function: "IntArray", Arguments: args}
+			}
+			arr = append(arr, xv)
+		} else {
+			xt := reflect.TypeOf(x)
+			if !xt.ConvertibleTo(intType) {
+				return nil, &ErrInvalidArguments{Function: "IntArray", Arguments: args}
+			}
+			arr = append(arr, reflect.ValueOf(x).Convert(intType).Interface().(int))
 		}
-		arr = append(arr, reflect.ValueOf(x).Convert(intType).Interface().(int))
 	}
 
 	return arr, nil
 }
 
-var ToIntArray = Function{
-	Name:    "IntArray",
-	Aliases: []string{"intArray"},
+var ToIntSlice = Function{
+	Name:    "IntSlice",
+	Aliases: []string{"intArray", "intSlice"},
 	Definitions: []Definition{
-		Definition{Inputs: []interface{}{reflect.Array}, Output: intArrayType},
-		Definition{Inputs: []interface{}{reflect.Slice}, Output: intArrayType},
+		Definition{Inputs: []interface{}{reflect.Array}, Output: intSliceType},
+		Definition{Inputs: []interface{}{reflect.Slice}, Output: intSliceType},
 	},
 	Function: intArray,
 }

@@ -8,35 +8,23 @@
 package af
 
 import (
-	"reflect"
 	"testing"
 
-	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
 )
 
-func TestIntersects(t *testing.T) {
-
+func TestIntersectsTrue(t *testing.T) {
 	a := map[string]struct{}{"a": struct{}{}, "b": struct{}{}, "c": struct{}{}}
 	b := map[string]struct{}{"a": struct{}{}, "b": struct{}{}}
-	c := map[string]struct{}{"d": struct{}{}, "e": struct{}{}}
+	out, err := Intersects.ValidateRun(a, b)
+	assert.NoError(t, err)
+	assert.Equal(t, true, out)
+}
 
-	testCases := []TestCase{
-		NewTestCase([]interface{}{a, b}, Intersects, true),
-		NewTestCase([]interface{}{a, c}, Intersects, false),
-	}
-
-	for _, testCase := range testCases {
-
-		valid := testCase.Function.IsValid(testCase.Inputs)
-		if !valid {
-			t.Errorf("inputs (%v) to function %q are invalid", testCase.Inputs, testCase.Function.Name)
-		}
-		got, err := testCase.Function.Run(testCase.Inputs)
-		if err != nil {
-			t.Errorf(errors.Wrap(err, "error running function \""+reflect.TypeOf(testCase.Function).Name()+"\"").Error())
-		} else if !reflect.DeepEqual(got, testCase.Output) {
-			t.Errorf(testCase.Function.Name+"(%v) == %v (%v), want %v (%s)", testCase.Inputs, got, reflect.TypeOf(got), testCase.Output, reflect.TypeOf(testCase.Output))
-		}
-	}
-
+func TestIntersectsFalse(t *testing.T) {
+	a := map[string]struct{}{"a": struct{}{}, "b": struct{}{}, "c": struct{}{}}
+	b := map[string]struct{}{"d": struct{}{}, "e": struct{}{}}
+	out, err := Intersects.ValidateRun(a, b)
+	assert.NoError(t, err)
+	assert.Equal(t, false, out)
 }

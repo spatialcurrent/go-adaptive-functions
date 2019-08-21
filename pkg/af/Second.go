@@ -36,7 +36,7 @@ var Second = Function{
 	Definitions: []Definition{
 		Definition{Inputs: []interface{}{byteSliceType}, Output: reflect.Uint8},
 		Definition{Inputs: []interface{}{uint8SliceType}, Output: reflect.Uint8},
-		Definition{Inputs: []interface{}{intArrayType}, Output: reflect.Int},
+		Definition{Inputs: []interface{}{intSliceType}, Output: reflect.Int},
 		Definition{Inputs: []interface{}{int64ArrayType}, Output: reflect.Int64},
 		Definition{Inputs: []interface{}{float64ArrayType}, Output: reflect.Float64},
 		Definition{Inputs: []interface{}{stringSliceType}, Output: reflect.String},

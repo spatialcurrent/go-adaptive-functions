@@ -23,18 +23,9 @@ var ToBytes = Function{
 	Name:    "ToBytes",
 	Aliases: []string{"bytes"},
 	Definitions: []Definition{
-		Definition{
-			Inputs: []interface{}{byteType},
-			Output: byteSliceType,
-		},
-		Definition{
-			Inputs: []interface{}{byteSliceType},
-			Output: byteSliceType,
-		},
-		Definition{
-			Inputs: []interface{}{stringType},
-			Output: byteSliceType,
-		},
+		Definition{Inputs: []interface{}{byteType}, Output: byteSliceType},
+		Definition{Inputs: []interface{}{byteSliceType}, Output: byteSliceType},
+		Definition{Inputs: []interface{}{stringType}, Output: byteSliceType},
 	},
 	Function: toBytes,
 }

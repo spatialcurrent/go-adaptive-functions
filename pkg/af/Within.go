@@ -16,7 +16,7 @@ var Within = Function{
 	Aliases: []string{"within"},
 	Definitions: []Definition{
 		Definition{Inputs: []interface{}{float64ArrayType, float64ArrayType}, Output: reflect.Bool},
-		Definition{Inputs: []interface{}{intArrayType, intArrayType}, Output: reflect.Bool},
+		Definition{Inputs: []interface{}{intSliceType, intSliceType}, Output: reflect.Bool},
 	},
 	Function: func(args ...interface{}) (interface{}, error) {
 		if coordinate, ok := args[0].([]float64); ok {

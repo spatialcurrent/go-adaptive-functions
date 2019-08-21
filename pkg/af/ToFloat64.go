@@ -29,7 +29,7 @@ func toFloat64(args ...interface{}) (interface{}, error) {
 	case string:
 		return strconv.ParseFloat(x, 64)
 	}
-	return nil, &ErrInvalidArguments{Function: "ToFloat32", Arguments: args}
+	return nil, &ErrInvalidArguments{Function: "ToFloat64", Arguments: args}
 }
 
 var ToFloat64 = Function{

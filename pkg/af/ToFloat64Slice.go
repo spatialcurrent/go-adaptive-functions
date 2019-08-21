@@ -8,21 +8,20 @@
 package af
 
 import (
-	"fmt"
 	"reflect"
 	"strconv"
 )
 
-func float64Array(args ...interface{}) (interface{}, error) {
+func float64Slice(args ...interface{}) (interface{}, error) {
 
 	if len(args) != 1 {
-		return nil, &ErrInvalidArguments{Function: "Float64Array", Arguments: args}
+		return nil, &ErrInvalidArguments{Function: "Float64Slice", Arguments: args}
 	}
 
 	t := reflect.TypeOf(args[0])
 	if !(t.Kind() == reflect.Array || t.Kind() == reflect.Slice) {
 		if reflect.ValueOf(args[0]).Len() == 0 {
-			return nil, &ErrInvalidArguments{Function: "Float64Array", Arguments: args}
+			return nil, &ErrInvalidArguments{Function: "Float64Slice", Arguments: args}
 		}
 	}
 
@@ -34,14 +33,13 @@ func float64Array(args ...interface{}) (interface{}, error) {
 		if xs, ok := x.(string); ok {
 			xv, err := strconv.ParseFloat(xs, 64)
 			if err != nil {
-				return nil, &ErrInvalidArguments{Function: "Float64Array", Arguments: args}
+				return nil, &ErrInvalidArguments{Function: "Float64Slice", Arguments: args}
 			}
 			arr = append(arr, xv)
 		} else {
 			xt := reflect.TypeOf(x)
 			if !xt.ConvertibleTo(float64Type) {
-				fmt.Println(fmt.Sprintf("Cannot convert: %T to float64", x))
-				return nil, &ErrInvalidArguments{Function: "Float64Array", Arguments: args}
+				return nil, &ErrInvalidArguments{Function: "Float64Slice", Arguments: args}
 			}
 			arr = append(arr, reflect.ValueOf(x).Convert(float64Type).Interface().(float64))
 		}
@@ -50,12 +48,12 @@ func float64Array(args ...interface{}) (interface{}, error) {
 	return arr, nil
 }
 
-var ToFloat64Array = Function{
-	Name:    "Float64Array",
-	Aliases: []string{"float64Array"},
+var ToFloat64Slice = Function{
+	Name:    "Float64Slice",
+	Aliases: []string{"float64Array", "float64Slice"},
 	Definitions: []Definition{
 		Definition{Inputs: []interface{}{reflect.Array}, Output: float64ArrayType},
 		Definition{Inputs: []interface{}{reflect.Slice}, Output: float64ArrayType},
 	},
-	Function: float64Array,
+	Function: float64Slice,
 }

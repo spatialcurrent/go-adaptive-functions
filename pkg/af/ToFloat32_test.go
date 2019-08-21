@@ -8,31 +8,19 @@
 package af
 
 import (
-	"reflect"
 	"testing"
 
-	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
 )
 
-func TestToFloat32(t *testing.T) {
+func TestToFloat32Int(t *testing.T) {
+	out, err := ToFloat32.ValidateRun(12)
+	assert.NoError(t, err)
+	assert.Equal(t, float32(12), out)
+}
 
-	testCases := []TestCase{
-		NewTestCase([]interface{}{12}, ToFloat32, float32(12)),
-		NewTestCase([]interface{}{"12.132123"}, ToFloat32, float32(12.132123)),
-	}
-
-	for _, testCase := range testCases {
-
-		valid := testCase.Function.IsValid(testCase.Inputs)
-		if !valid {
-			t.Errorf("inputs (%v) to function %q are invalid", testCase.Inputs, testCase.Function.Name)
-		}
-		got, err := testCase.Function.Run(testCase.Inputs)
-		if err != nil {
-			t.Errorf(errors.Wrap(err, "error running function \""+reflect.TypeOf(testCase.Function).Name()+"\"").Error())
-		} else if !reflect.DeepEqual(got, testCase.Output) {
-			t.Errorf(testCase.Function.Name+"(%v) == %v (%v), want %v (%s)", testCase.Inputs, got, reflect.TypeOf(got), testCase.Output, reflect.TypeOf(testCase.Output))
-		}
-	}
-
+func TestToFloat32String(t *testing.T) {
+	out, err := ToFloat32.ValidateRun("12.132123")
+	assert.NoError(t, err)
+	assert.Equal(t, float32(12.132123), out)
 }

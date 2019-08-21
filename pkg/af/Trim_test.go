@@ -22,5 +22,5 @@ func TestTrimString(t *testing.T) {
 func TestTrimSlice(t *testing.T) {
 	out, err := Trim.ValidateRun([]string{"\thello ", "\nbeautiful world"})
 	assert.NoError(t, err)
-	assert.Equal(t, []string{"hello world"}, out)
+	assert.Equal(t, []string{"hello", "beautiful world"}, out)
 }

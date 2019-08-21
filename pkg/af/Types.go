@@ -44,7 +44,7 @@ var uint82DSliceType = reflect.TypeOf([][]uint8{})
 
 var stringSliceType = reflect.TypeOf([]string{})
 
-var intArrayType = reflect.TypeOf([]int{})
+var intSliceType = reflect.TypeOf([]int{})
 var int64ArrayType = reflect.TypeOf([]int64{})
 var float64ArrayType = reflect.TypeOf([]float64{})
 var stringIntMapSliceType = reflect.TypeOf([]map[string]int{})

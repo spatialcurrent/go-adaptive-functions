@@ -37,10 +37,7 @@ var ToKeys = Function{
 	Name:    "ToKeys",
 	Aliases: []string{"keys"},
 	Definitions: []Definition{
-		Definition{
-			Inputs: []interface{}{reflect.Map},
-			Output: reflect.Slice,
-		},
+		Definition{Inputs: []interface{}{reflect.Map}, Output: reflect.Slice},
 	},
 	Function: toKeys,
 }

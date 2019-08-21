@@ -8,30 +8,25 @@
 package af
 
 import (
-	"reflect"
 	"testing"
 
-	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
 )
 
-func TestToBytes(t *testing.T) {
+func TestToBytesString(t *testing.T) {
+	out, err := ToBytes.ValidateRun("abc")
+	assert.NoError(t, err)
+	assert.Equal(t, []byte("abc"), out)
+}
 
-	testCases := []TestCase{
-		NewTestCase([]interface{}{"abc"}, ToBytes, []byte("abc")),
-	}
+func TestToBytesByte(t *testing.T) {
+	out, err := ToBytes.ValidateRun([]byte("a")[0])
+	assert.NoError(t, err)
+	assert.Equal(t, []byte("a"), out)
+}
 
-	for _, testCase := range testCases {
-
-		valid := testCase.Function.IsValid(testCase.Inputs)
-		if !valid {
-			t.Errorf("inputs (%v) to function %q are invalid", testCase.Inputs, testCase.Function.Name)
-		}
-		got, err := testCase.Function.Run(testCase.Inputs)
-		if err != nil {
-			t.Errorf(errors.Wrap(err, "error running function \""+reflect.TypeOf(testCase.Function).Name()+"\"").Error())
-		} else if !reflect.DeepEqual(got, testCase.Output) {
-			t.Errorf(testCase.Function.Name+"(%v) == %v (%v), want %v (%s)", testCase.Inputs, got, reflect.TypeOf(got), testCase.Output, reflect.TypeOf(testCase.Output))
-		}
-	}
-
+func TestToBytesBytes(t *testing.T) {
+	out, err := ToBytes.ValidateRun([]byte("abc"))
+	assert.NoError(t, err)
+	assert.Equal(t, []byte("abc"), out)
 }

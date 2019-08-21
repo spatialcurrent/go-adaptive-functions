@@ -8,41 +8,31 @@
 package af
 
 import (
-	"reflect"
 	"testing"
 
-	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
 )
 
-func TestToSet(t *testing.T) {
+func TestToSetSet(t *testing.T) {
+	out, err := ToSet.ValidateRun(map[string]struct{}{"a": struct{}{}, "b": struct{}{}})
+	assert.NoError(t, err)
+	assert.Equal(t, map[string]struct{}{"a": struct{}{}, "b": struct{}{}}, out)
+}
 
-	testCases := []TestCase{
-		NewTestCase(
-			[]interface{}{[]string{"a", "b"}},
-			ToSet,
-			map[string]struct{}{"a": struct{}{}, "b": struct{}{}}),
-		NewTestCase(
-			[]interface{}{map[string]struct{}{"a": struct{}{}, "b": struct{}{}}},
-			ToSet,
-			map[string]struct{}{"a": struct{}{}, "b": struct{}{}}),
-		NewTestCase(
-			[]interface{}{map[string]interface{}{"a": 1, "b": 2}},
-			ToSet,
-			map[string]struct{}{"a": struct{}{}, "b": struct{}{}}),
-	}
+func TestToSetMap(t *testing.T) {
+	out, err := ToSet.ValidateRun(map[string]interface{}{"a": 1, "b": 2})
+	assert.NoError(t, err)
+	assert.Equal(t, map[string]struct{}{"a": struct{}{}, "b": struct{}{}}, out)
+}
 
-	for _, testCase := range testCases {
+func TestToSetStrings(t *testing.T) {
+	out, err := ToSet.ValidateRun([]string{"a", "b"})
+	assert.NoError(t, err)
+	assert.Equal(t, map[string]struct{}{"a": struct{}{}, "b": struct{}{}}, out)
+}
 
-		valid := testCase.Function.IsValid(testCase.Inputs)
-		if !valid {
-			t.Errorf("inputs (%v) to function %q are invalid", testCase.Inputs, testCase.Function.Name)
-		}
-		got, err := testCase.Function.Run(testCase.Inputs)
-		if err != nil {
-			t.Errorf(errors.Wrap(err, "error running function \""+reflect.TypeOf(testCase.Function).Name()+"\"").Error())
-		} else if !reflect.DeepEqual(got, testCase.Output) {
-			t.Errorf(testCase.Function.Name+"(%v) == %v (%v), want %v (%s)", testCase.Inputs, got, reflect.TypeOf(got), testCase.Output, reflect.TypeOf(testCase.Output))
-		}
-	}
-
+func TestToSetInts(t *testing.T) {
+	out, err := ToSet.ValidateRun([]int{1, 2})
+	assert.NoError(t, err)
+	assert.Equal(t, map[int]struct{}{1: struct{}{}, 2: struct{}{}}, out)
 }

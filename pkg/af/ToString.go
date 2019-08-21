@@ -8,6 +8,7 @@
 package af
 
 import (
+	"fmt"
 	"reflect"
 )
 
@@ -26,25 +27,15 @@ func toString(args ...interface{}) (interface{}, error) {
 	case []byte:
 		return string(x), nil
 	}
-	return nil, &ErrInvalidArguments{Function: "ToString", Arguments: args}
+
+	return fmt.Sprint(args[0]), nil
 }
 
 var ToString = Function{
 	Name:    "ToString",
-	Aliases: []string{"string"},
+	Aliases: []string{"string", "str"},
 	Definitions: []Definition{
-		Definition{
-			Inputs: []interface{}{byteType},
-			Output: stringType,
-		},
-		Definition{
-			Inputs: []interface{}{byteSliceType},
-			Output: stringType,
-		},
-		Definition{
-			Inputs: []interface{}{stringType},
-			Output: stringType,
-		},
+		Definition{Inputs: []interface{}{nil}, Output: stringType},
 	},
 	Function: toString,
 }

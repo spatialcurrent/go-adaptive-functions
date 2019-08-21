@@ -14,13 +14,13 @@ import (
 )
 
 func TestToTitleString(t *testing.T) {
-	out, err := ToUpper.ValidateRun("hello world")
+	out, err := ToTitle.ValidateRun("hello world")
 	assert.NoError(t, err)
 	assert.Equal(t, "Hello World", out)
 }
 
 func TestToTitleBytes(t *testing.T) {
-	out, err := ToUpper.ValidateRun([]byte("hello world"))
+	out, err := ToTitle.ValidateRun([]byte("hello world"))
 	assert.NoError(t, err)
 	assert.Equal(t, []byte("Hello World"), out)
 }

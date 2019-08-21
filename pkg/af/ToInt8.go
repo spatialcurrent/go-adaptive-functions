@@ -29,7 +29,7 @@ func toInt8(args ...interface{}) (interface{}, error) {
 		if err != nil {
 			return i, err
 		}
-		return int16(i), nil
+		return int8(i), nil
 	}
 	return nil, &ErrInvalidArguments{Function: "ToInt8", Arguments: args}
 }

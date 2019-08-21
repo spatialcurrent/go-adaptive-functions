@@ -55,9 +55,9 @@ var Sort = Function{
 	Aliases: []string{"sort"},
 	Definitions: []Definition{
 		Definition{Inputs: []interface{}{stringSliceType}, Output: stringSliceType},
-		Definition{Inputs: []interface{}{intArrayType}, Output: intArrayType},
+		Definition{Inputs: []interface{}{intSliceType}, Output: intSliceType},
 		Definition{Inputs: []interface{}{stringSliceType, boolType}, Output: stringSliceType},
-		Definition{Inputs: []interface{}{intArrayType, boolType}, Output: intArrayType},
+		Definition{Inputs: []interface{}{intSliceType, boolType}, Output: intSliceType},
 	},
 	Function: sortArray,
 }

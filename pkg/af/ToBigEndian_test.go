@@ -10,36 +10,18 @@ package af
 import (
 	"bytes"
 	"encoding/binary"
-	"reflect"
 	"testing"
 
-	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestToBigEndian(t *testing.T) {
-
 	buf := new(bytes.Buffer)
 	err := binary.Write(buf, binary.BigEndian, int64(123))
 	if err != nil {
 		panic(err)
 	}
-
-	testCases := []TestCase{
-		NewTestCase([]interface{}{123}, ToBigEndian, buf.Bytes()),
-	}
-
-	for _, testCase := range testCases {
-
-		valid := testCase.Function.IsValid(testCase.Inputs)
-		if !valid {
-			t.Errorf("inputs (%v) to function %q are invalid", testCase.Inputs, testCase.Function.Name)
-		}
-		got, err := testCase.Function.Run(testCase.Inputs)
-		if err != nil {
-			t.Errorf(errors.Wrap(err, "error running function \""+reflect.TypeOf(testCase.Function).Name()+"\"").Error())
-		} else if !reflect.DeepEqual(got, testCase.Output) {
-			t.Errorf(testCase.Function.Name+"(%v) == %v (%v), want %v (%s)", testCase.Inputs, got, reflect.TypeOf(got), testCase.Output, reflect.TypeOf(testCase.Output))
-		}
-	}
-
+	out, err := ToBigEndian.ValidateRun(int64(123))
+	assert.NoError(t, err)
+	assert.Equal(t, buf.Bytes(), out)
 }

@@ -8,30 +8,31 @@
 package af
 
 import (
-	"reflect"
 	"testing"
 
-	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
 )
 
-func TestToString(t *testing.T) {
+func TestToStringBytes(t *testing.T) {
+	out, err := ToString.ValidateRun([]byte("hello world"))
+	assert.NoError(t, err)
+	assert.Equal(t, "hello world", out)
+}
 
-	testCases := []TestCase{
-		NewTestCase([]interface{}{[]byte("abc")}, ToString, "abc"),
-	}
+func TestToStringByte(t *testing.T) {
+	out, err := ToString.ValidateRun([]byte("x")[0])
+	assert.NoError(t, err)
+	assert.Equal(t, "x", out)
+}
 
-	for _, testCase := range testCases {
+func TestToStringString(t *testing.T) {
+	out, err := ToString.ValidateRun("hello world")
+	assert.NoError(t, err)
+	assert.Equal(t, "hello world", out)
+}
 
-		valid := testCase.Function.IsValid(testCase.Inputs)
-		if !valid {
-			t.Errorf("inputs (%v) to function %q are invalid", testCase.Inputs, testCase.Function.Name)
-		}
-		got, err := testCase.Function.Run(testCase.Inputs)
-		if err != nil {
-			t.Errorf(errors.Wrap(err, "error running function \""+reflect.TypeOf(testCase.Function).Name()+"\"").Error())
-		} else if !reflect.DeepEqual(got, testCase.Output) {
-			t.Errorf(testCase.Function.Name+"(%v) == %v (%v), want %v (%s)", testCase.Inputs, got, reflect.TypeOf(got), testCase.Output, reflect.TypeOf(testCase.Output))
-		}
-	}
-
+func TestToStringInt(t *testing.T) {
+	out, err := ToString.ValidateRun(2)
+	assert.NoError(t, err)
+	assert.Equal(t, "2", out)
 }

@@ -8,30 +8,19 @@
 package af
 
 import (
-	"reflect"
 	"testing"
 
-	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
 )
 
-func TestToInt8(t *testing.T) {
+func TestToInt8Int(t *testing.T) {
+	out, err := ToInt8.ValidateRun(12)
+	assert.NoError(t, err)
+	assert.Equal(t, int8(12), out)
+}
 
-	testCases := []TestCase{
-		NewTestCase([]interface{}{12}, ToInt8, int8(12)),
-	}
-
-	for _, testCase := range testCases {
-
-		valid := testCase.Function.IsValid(testCase.Inputs)
-		if !valid {
-			t.Errorf("inputs (%v) to function %q are invalid", testCase.Inputs, testCase.Function.Name)
-		}
-		got, err := testCase.Function.Run(testCase.Inputs)
-		if err != nil {
-			t.Errorf(errors.Wrap(err, "error running function \""+reflect.TypeOf(testCase.Function).Name()+"\"").Error())
-		} else if !reflect.DeepEqual(got, testCase.Output) {
-			t.Errorf(testCase.Function.Name+"(%v) == %v (%v), want %v (%s)", testCase.Inputs, got, reflect.TypeOf(got), testCase.Output, reflect.TypeOf(testCase.Output))
-		}
-	}
-
+func TestToInt8String(t *testing.T) {
+	out, err := ToInt8.ValidateRun("12")
+	assert.NoError(t, err)
+	assert.Equal(t, int8(12), out)
 }

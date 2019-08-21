@@ -37,10 +37,7 @@ var ToItems = Function{
 	Name:    "ToItems",
 	Aliases: []string{"items"},
 	Definitions: []Definition{
-		Definition{
-			Inputs: []interface{}{reflect.Map},
-			Output: reflect.Slice,
-		},
+		Definition{Inputs: []interface{}{reflect.Map}, Output: reflect.Slice},
 	},
 	Function: toItems,
 }

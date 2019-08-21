@@ -43,7 +43,7 @@ func TestTopNumber(t *testing.T) {
 	}
 	out, err := Top.ValidateRun(c, 2)
 	assert.NoError(t, err)
-	assert.Equal(t, []string{"y", "z"}, out)
+	assert.Equal(t, []string{"x", "y"}, out)
 }
 
 func TestTopNumberMax(t *testing.T) {

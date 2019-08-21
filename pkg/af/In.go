@@ -69,7 +69,7 @@ func in(args ...interface{}) (interface{}, error) {
 
 		return false, nil
 
-	} else if at.AssignableTo(intArrayType) && bt.AssignableTo(intArrayType) {
+	} else if at.AssignableTo(intSliceType) && bt.AssignableTo(intSliceType) {
 
 		av := a.([]int)
 		bv := b.([]int)
@@ -176,7 +176,7 @@ var In = Function{
 		Definition{Inputs: []interface{}{ipType, ipNetType}, Output: reflect.Bool},
 		Definition{Inputs: []interface{}{ipType, ipNetPtrType}, Output: reflect.Bool},
 		Definition{Inputs: []interface{}{reflect.String, reflect.String}, Output: reflect.Bool},
-		Definition{Inputs: []interface{}{intArrayType, intArrayType}, Output: reflect.Bool},
+		Definition{Inputs: []interface{}{intSliceType, intSliceType}, Output: reflect.Bool},
 		Definition{Inputs: []interface{}{stringSliceType, stringSliceType}, Output: reflect.Bool},
 		Definition{Inputs: []interface{}{byteSliceType, byteSliceType}, Output: reflect.Bool},
 		Definition{Inputs: []interface{}{reflect.String, reflect.Array}, Output: reflect.Bool},

@@ -45,7 +45,8 @@ var ToStringSet = Function{
 	Name:    "ToStringSet",
 	Aliases: []string{"stringSet"},
 	Definitions: []Definition{
-		Definition{Inputs: []interface{}{reflect.Slice}, Output: reflect.Map},
+		Definition{Inputs: []interface{}{reflect.Array}, Output: stringSetType},
+		Definition{Inputs: []interface{}{reflect.Slice}, Output: stringSetType},
 		Definition{Inputs: []interface{}{reflect.Map}, Output: stringSetType},
 	},
 	Function: stringSet,

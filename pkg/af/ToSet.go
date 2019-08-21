@@ -45,6 +45,7 @@ var ToSet = Function{
 	Name:    "ToSet",
 	Aliases: []string{"set"},
 	Definitions: []Definition{
+		Definition{Inputs: []interface{}{reflect.Array}, Output: reflect.Map},
 		Definition{Inputs: []interface{}{reflect.Slice}, Output: reflect.Map},
 		Definition{Inputs: []interface{}{reflect.Map}, Output: reflect.Map},
 	},

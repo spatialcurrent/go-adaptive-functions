@@ -37,10 +37,7 @@ var ToValues = Function{
 	Name:    "ToValues",
 	Aliases: []string{"values"},
 	Definitions: []Definition{
-		Definition{
-			Inputs: []interface{}{reflect.Map},
-			Output: interfaceArrayType,
-		},
+		Definition{Inputs: []interface{}{reflect.Map}, Output: interfaceArrayType},
 	},
 	Function: toValues,
 }
