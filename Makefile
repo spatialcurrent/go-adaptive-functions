@@ -42,11 +42,3 @@ vet: ## Vet Go source code
 .PHONY: test_go
 test: ## Run Go tests
 	bash scripts/test.sh
-
-#
-# Clean
-#
-
-clean:
-	rm -fr bin
-	rm -fr dist

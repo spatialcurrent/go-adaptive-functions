@@ -15,7 +15,7 @@ jobs:
           key: v1-go-src-{{ .Branch }}-{{ .Revision }}
           paths:
             - /go/src
-  test_go:
+  test:
     executor: base
     steps:
       - run: sudo chown -R circleci /go/src

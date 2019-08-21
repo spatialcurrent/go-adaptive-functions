@@ -19,5 +19,5 @@ func Example_repeat() {
 		panic(err)
 	}
 	fmt.Println(out)
-	// Output: ciaocaio
+	// Output: ciaociao
 }
