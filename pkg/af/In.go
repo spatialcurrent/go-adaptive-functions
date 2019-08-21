@@ -43,7 +43,7 @@ func in(args ...interface{}) (interface{}, error) {
 			}
 		}
 
-	} else if at.AssignableTo(stringArrayType) && bt.AssignableTo(stringArrayType) {
+	} else if at.AssignableTo(stringSliceType) && bt.AssignableTo(stringSliceType) {
 
 		av := a.([]string)
 		bv := b.([]string)
@@ -97,7 +97,7 @@ func in(args ...interface{}) (interface{}, error) {
 
 		return false, nil
 
-	} else if at.AssignableTo(byteArrayType) && bt.AssignableTo(byteArrayType) {
+	} else if at.AssignableTo(byteSliceType) && bt.AssignableTo(byteSliceType) {
 
 		av := a.([]byte)
 		bv := b.([]byte)
@@ -177,8 +177,8 @@ var In = Function{
 		Definition{Inputs: []interface{}{ipType, ipNetPtrType}, Output: reflect.Bool},
 		Definition{Inputs: []interface{}{reflect.String, reflect.String}, Output: reflect.Bool},
 		Definition{Inputs: []interface{}{intArrayType, intArrayType}, Output: reflect.Bool},
-		Definition{Inputs: []interface{}{stringArrayType, stringArrayType}, Output: reflect.Bool},
-		Definition{Inputs: []interface{}{byteArrayType, byteArrayType}, Output: reflect.Bool},
+		Definition{Inputs: []interface{}{stringSliceType, stringSliceType}, Output: reflect.Bool},
+		Definition{Inputs: []interface{}{byteSliceType, byteSliceType}, Output: reflect.Bool},
 		Definition{Inputs: []interface{}{reflect.String, reflect.Array}, Output: reflect.Bool},
 		Definition{Inputs: []interface{}{reflect.String, reflect.Slice}, Output: reflect.Bool},
 		Definition{Inputs: []interface{}{reflect.String, reflect.Map}, Output: reflect.Bool},

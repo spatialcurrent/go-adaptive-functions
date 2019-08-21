@@ -8,45 +8,43 @@
 package af
 
 import (
-	"reflect"
 	"testing"
 
-	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
 )
 
-func TestAdd(t *testing.T) {
+func TestAddInts(t *testing.T) {
+	out, err := Add.ValidateRun(1, 2)
+	assert.NoError(t, err)
+	assert.Equal(t, 3, out)
+}
 
-	testCases := []TestCase{
-		NewTestCase([]interface{}{1, 2}, Add, 3),
-		NewTestCase([]interface{}{4, 2.0}, Add, 6.0),
-		NewTestCase(
-			[]interface{}{
-				map[string]string{"a": "x", "b": "y"},
-				map[string]string{"a": "d"},
-			},
-			Add,
-			map[string]string{"a": "d", "b": "y"}),
-		NewTestCase(
-			[]interface{}{
-				[]uint8{uint8(0), uint8(1), uint8(2)},
-				[]uint8{uint8(3), uint8(4), uint8(5)},
-			},
-			Add,
-			[]uint8{uint8(0), uint8(1), uint8(2), uint8(3), uint8(4), uint8(5)}),
-	}
+func TestAddFloats(t *testing.T) {
+	out, err := Add.ValidateRun(0.1, 0.3)
+	assert.NoError(t, err)
+	assert.Equal(t, 0.4, out)
+}
 
-	for _, testCase := range testCases {
+func TestAddStrings(t *testing.T) {
+	out, err := Add.ValidateRun("foo", "bar")
+	assert.NoError(t, err)
+	assert.Equal(t, "foobar", out)
+}
 
-		valid := testCase.Function.IsValid(testCase.Inputs)
-		if !valid {
-			t.Errorf("inputs (%v) to function %q are invalid", testCase.Inputs, testCase.Function.Name)
-		}
-		got, err := testCase.Function.Run(testCase.Inputs)
-		if err != nil {
-			t.Errorf(errors.Wrap(err, "error running function \""+reflect.TypeOf(testCase.Function).Name()+"\"").Error())
-		} else if !reflect.DeepEqual(got, testCase.Output) {
-			t.Errorf(testCase.Function.Name+"(%v) == %v (%v), want %v (%s)", testCase.Inputs, got, reflect.TypeOf(got), testCase.Output, reflect.TypeOf(testCase.Output))
-		}
-	}
+func TestAddSets(t *testing.T) {
+	out, err := Add.ValidateRun(map[string]struct{}{"a": struct{}{}}, map[string]struct{}{"b": struct{}{}})
+	assert.NoError(t, err)
+	assert.Equal(t, map[string]struct{}{"a": struct{}{}, "b": struct{}{}}, out)
+}
 
+func TestAddMapsStringInterface(t *testing.T) {
+	out, err := Add.ValidateRun(map[string]interface{}{"a": "x"}, map[string]interface{}{"b": 2})
+	assert.NoError(t, err)
+	assert.Equal(t, map[string]interface{}{"a": "x", "b": 2}, out)
+}
+
+func TestAddMapsInterfaceInterface(t *testing.T) {
+	out, err := Add.ValidateRun(map[int]interface{}{1: "x"}, map[string]interface{}{"b": 2})
+	assert.NoError(t, err)
+	assert.Equal(t, map[interface{}]interface{}{1: "x", "b": 2}, out)
 }

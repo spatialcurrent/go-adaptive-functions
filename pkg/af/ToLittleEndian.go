@@ -38,11 +38,11 @@ var ToLittleEndian = Function{
 	Name:    "ToLittleEndian",
 	Aliases: []string{"little"},
 	Definitions: []Definition{
-		Definition{Inputs: []interface{}{intType}, Output: byteArrayType},
-		Definition{Inputs: []interface{}{int8Type}, Output: byteArrayType},
-		Definition{Inputs: []interface{}{int16Type}, Output: byteArrayType},
-		Definition{Inputs: []interface{}{int32Type}, Output: byteArrayType},
-		Definition{Inputs: []interface{}{int64Type}, Output: byteArrayType},
+		Definition{Inputs: []interface{}{intType}, Output: byteSliceType},
+		Definition{Inputs: []interface{}{int8Type}, Output: byteSliceType},
+		Definition{Inputs: []interface{}{int16Type}, Output: byteSliceType},
+		Definition{Inputs: []interface{}{int32Type}, Output: byteSliceType},
+		Definition{Inputs: []interface{}{int64Type}, Output: byteSliceType},
 	},
 	Function: toLittleEndian,
 }

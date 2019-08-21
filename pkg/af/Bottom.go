@@ -8,46 +8,34 @@
 package af
 
 import (
-	"github.com/spatialcurrent/go-counter/counter"
+	"github.com/spatialcurrent/go-counter/pkg/counter"
 )
 
 func bottom(args ...interface{}) (interface{}, error) {
-
 	if len(args) == 2 {
-		switch n := args[1].(type) {
-		case int:
-			switch c := args[0].(type) {
-			case counter.Counter:
-				return c.Bottom(n, 0), nil
-			case map[string]int:
-				return counter.Counter(c).Bottom(n, 0), nil
+		if n, ok := args[1].(int); ok {
+			if c, ok := args[0].(counter.Counter); ok {
+				return counter.Counter(c).Bottom(n, -1, true), nil
 			}
 		}
 	} else if len(args) == 3 {
-		switch max := args[2].(type) {
-		case int:
-			switch n := args[1].(type) {
-			case int:
-				switch c := args[0].(type) {
-				case counter.Counter:
-					return c.Bottom(n, max), nil
-				case map[string]int:
-					return counter.Counter(c).Bottom(n, max), nil
+		if max, ok := args[2].(int); ok {
+			if n, ok := args[1].(int); ok {
+				if c, ok := args[0].(counter.Counter); ok {
+					return counter.Counter(c).Bottom(n, max, true), nil
 				}
 			}
 		}
 	}
-
 	return nil, &ErrInvalidArguments{Function: "Bottom", Arguments: args}
-
 }
 
 var Bottom = Function{
 	Name:    "Bottom",
 	Aliases: []string{"bottom"},
 	Definitions: []Definition{
-		Definition{Inputs: []interface{}{stringIntMapType, intType}, Output: stringArrayType},
-		Definition{Inputs: []interface{}{stringIntMapType, intType, intType}, Output: stringArrayType},
+		Definition{Inputs: []interface{}{stringIntMapType, intType}, Output: stringSliceType},
+		Definition{Inputs: []interface{}{stringIntMapType, intType, intType}, Output: stringSliceType},
 	},
 	Function: bottom,
 }

@@ -46,7 +46,7 @@ var ToArray = Function{
 	Name:    "ToArray",
 	Aliases: []string{"array"},
 	Definitions: []Definition{
-		Definition{Inputs: []interface{}{stringSetType}, Output: stringArrayType},
+		Definition{Inputs: []interface{}{stringSetType}, Output: stringSliceType},
 		Definition{Inputs: []interface{}{intSetType}, Output: intArrayType},
 		Definition{Inputs: []interface{}{interfaceSetType}, Output: interfaceArrayType},
 		Definition{Inputs: []interface{}{reflect.Map}, Output: interface2DArrayType},

@@ -8,30 +8,25 @@
 package af
 
 import (
-	"reflect"
 	"testing"
 
-	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
 )
 
-func TestReplace(t *testing.T) {
+func TestReplaceStrings(t *testing.T) {
+	out, err := Replace.ValidateRun("hello world", "world", "earth")
+	assert.NoError(t, err)
+	assert.Equal(t, "hello earth", out)
+}
 
-	testCases := []TestCase{
-		NewTestCase([]interface{}{"hello world", "world", "earth"}, Replace, "hello earth"),
-	}
+func TestReplaceByte(t *testing.T) {
+	out, err := Replace.ValidateRun([]byte("hello world"), []byte(" ")[0], []byte("+")[0])
+	assert.NoError(t, err)
+	assert.Equal(t, []byte("hello+world"), out)
+}
 
-	for _, testCase := range testCases {
-
-		valid := testCase.Function.IsValid(testCase.Inputs)
-		if !valid {
-			t.Errorf("inputs (%v) to function %q are invalid", testCase.Inputs, testCase.Function.Name)
-		}
-		got, err := testCase.Function.Run(testCase.Inputs)
-		if err != nil {
-			t.Errorf(errors.Wrap(err, "error running function \""+reflect.TypeOf(testCase.Function).Name()+"\"").Error())
-		} else if !reflect.DeepEqual(got, testCase.Output) {
-			t.Errorf(testCase.Function.Name+"(%v) == %v (%v), want %v (%s)", testCase.Inputs, got, reflect.TypeOf(got), testCase.Output, reflect.TypeOf(testCase.Output))
-		}
-	}
-
+func TestReplaceBytes(t *testing.T) {
+	out, err := Replace.ValidateRun([]byte("hello world"), []byte("world"), []byte("earth"))
+	assert.NoError(t, err)
+	assert.Equal(t, []byte("hello earth"), out)
 }

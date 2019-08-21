@@ -8,6 +8,7 @@
 package af
 
 import (
+	"bytes"
 	"reflect"
 	"strings"
 )
@@ -21,14 +22,22 @@ func prefix(args ...interface{}) (interface{}, error) {
 	a := args[0]
 	b := args[1]
 
-	at := reflect.TypeOf(a)
-	bt := reflect.TypeOf(b)
-
-	if at.Kind() == reflect.String && bt.Kind() == reflect.String {
-		return strings.HasPrefix(a.(string), b.(string)), nil
+	if av, ok := a.(string); ok {
+		if bv, ok := b.(string); ok {
+			return strings.HasPrefix(av, bv), nil
+		}
 	}
 
-	if !(at.Kind() == reflect.Array || at.Kind() == reflect.Slice) && (bt.Kind() == reflect.Array || bt.Kind() == reflect.Slice) {
+	if av, ok := a.([]byte); ok {
+		if bv, ok := b.([]byte); ok {
+			return bytes.HasPrefix(av, bv), nil
+		}
+	}
+
+	ak := reflect.TypeOf(a).Kind()
+	bk := reflect.TypeOf(b).Kind()
+
+	if !(ak == reflect.Array || ak == reflect.Slice) && (bk == reflect.Array || bk == reflect.Slice) {
 		return nil, &ErrInvalidArguments{Function: "Prefix", Arguments: args}
 	}
 
@@ -36,7 +45,7 @@ func prefix(args ...interface{}) (interface{}, error) {
 	bv := reflect.ValueOf(b)
 
 	if bv.Len() > av.Len() {
-		return nil, &ErrInvalidArguments{Function: "Prefix", Arguments: args}
+		return false, nil
 	}
 
 	bl := bv.Len()

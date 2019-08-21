@@ -24,7 +24,7 @@ func toInt32(args ...interface{}) (interface{}, error) {
 		return x, nil
 	case int64:
 		if reflect.ValueOf(int32(0)).OverflowInt(x) {
-			return int32(0.0), &ErrorOverflow{Original: x, Target: int32Type}
+			return int32(0.0), &ErrOverflow{Original: x, Target: int32Type}
 		}
 		return int32(x), nil
 	case float32:

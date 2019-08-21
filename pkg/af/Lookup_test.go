@@ -8,32 +8,44 @@
 package af
 
 import (
-	"reflect"
 	"testing"
 
-	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
 )
 
-func TestLookup(t *testing.T) {
+func TestLookupMapStringInterface(t *testing.T) {
+	out, err := Lookup.ValidateRun(map[string]interface{}{"x": "y"}, "x")
+	assert.NoError(t, err)
+	assert.Equal(t, "y", out)
+}
 
-	testCases := []TestCase{
-		NewTestCase([]interface{}{map[string]interface{}{"yo": "dude"}, "yo"}, Lookup, "dude"),
-		NewTestCase([]interface{}{map[int]interface{}{4: "dude"}, 4}, Lookup, "dude"),
-		NewTestCase([]interface{}{[]string{"yo", "dude"}, 1}, Lookup, "dude"),
-	}
+func TestLookupMapStringInterfaceFallback(t *testing.T) {
+	out, err := Lookup.ValidateRun(map[string]interface{}{"x": "y"}, "z", "z")
+	assert.NoError(t, err)
+	assert.Equal(t, "z", out)
+}
 
-	for _, testCase := range testCases {
+func TestLookupMapIntInterface(t *testing.T) {
+	out, err := Lookup.ValidateRun(map[int]interface{}{4: "y"}, 4)
+	assert.NoError(t, err)
+	assert.Equal(t, "y", out)
+}
 
-		valid := testCase.Function.IsValid(testCase.Inputs)
-		if !valid {
-			t.Errorf("inputs (%v) to function %q are invalid", testCase.Inputs, testCase.Function.Name)
-		}
-		got, err := testCase.Function.Run(testCase.Inputs)
-		if err != nil {
-			t.Errorf(errors.Wrap(err, "error running function \""+reflect.TypeOf(testCase.Function).Name()+"\"").Error())
-		} else if !reflect.DeepEqual(got, testCase.Output) {
-			t.Errorf(testCase.Function.Name+"(%v) == %v (%v), want %v (%s)", testCase.Inputs, got, reflect.TypeOf(got), testCase.Output, reflect.TypeOf(testCase.Output))
-		}
-	}
+func TestLookupMapIntInterfaceFallback(t *testing.T) {
+	out, err := Lookup.ValidateRun(map[int]interface{}{4: "y"}, 5, 6)
+	assert.NoError(t, err)
+	assert.Equal(t, 6, out)
+}
 
+func TestLookupStringInterface(t *testing.T) {
+	out, err := Lookup.ValidateRun([]string{"x", "y"}, 1)
+	assert.NoError(t, err)
+	assert.Equal(t, "y", out)
+}
+
+func TestLookupStringInterfaceOverflow(t *testing.T) {
+	out, err := Lookup.ValidateRun([]string{"x", "y"}, 2)
+	assert.NotNil(t, err)
+	assert.IsType(t, &ErrOutOfRange{}, err)
+	assert.Nil(t, out)
 }

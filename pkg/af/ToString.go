@@ -38,7 +38,7 @@ var ToString = Function{
 			Output: stringType,
 		},
 		Definition{
-			Inputs: []interface{}{byteArrayType},
+			Inputs: []interface{}{byteSliceType},
 			Output: stringType,
 		},
 		Definition{

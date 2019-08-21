@@ -28,7 +28,6 @@ func format(args ...interface{}) (interface{}, error) {
 		}
 	case string:
 		if len(args) > 1 {
-			fmt.Println(fmt.Sprintf("* Formatting:", args))
 			return fmt.Sprintf(x, args[1:]...), nil
 		}
 		return x, nil

@@ -8,37 +8,56 @@
 package af
 
 import (
-	"reflect"
 	"testing"
 
-	"github.com/pkg/errors"
-	"github.com/spatialcurrent/go-counter/counter"
+	"github.com/spatialcurrent/go-counter/pkg/counter"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestBottom(t *testing.T) {
-
-	words := []string{"a", "a", "a", "b", "b", "c"}
-	hist := counter.New()
-	for _, w := range words {
-		hist.Increment(w)
+	c := counter.New()
+	for i := 0; i < 8; i++ {
+		c.Increment("x")
 	}
-
-	testCases := []TestCase{
-		NewTestCase([]interface{}{hist, 1}, Bottom, []string{"c"}),
+	for i := 0; i < 4; i++ {
+		c.Increment("y")
 	}
-
-	for _, testCase := range testCases {
-
-		valid := testCase.Function.IsValid(testCase.Inputs)
-		if !valid {
-			t.Errorf("inputs (%v) to function %q are invalid", testCase.Inputs, testCase.Function.Name)
-		}
-		got, err := testCase.Function.Run(testCase.Inputs)
-		if err != nil {
-			t.Errorf(errors.Wrap(err, "error running function \""+reflect.TypeOf(testCase.Function).Name()+"\"").Error())
-		} else if !reflect.DeepEqual(got, testCase.Output) {
-			t.Errorf(testCase.Function.Name+"(%v) == %v (%v), want %v (%s)", testCase.Inputs, got, reflect.TypeOf(got), testCase.Output, reflect.TypeOf(testCase.Output))
-		}
+	for i := 0; i < 2; i++ {
+		c.Increment("z")
 	}
+	out, err := Bottom.ValidateRun(c, 1)
+	assert.NoError(t, err)
+	assert.Equal(t, []string{"z"}, out)
+}
 
+func TestBottomNumber(t *testing.T) {
+	c := counter.New()
+	for i := 0; i < 8; i++ {
+		c.Increment("x")
+	}
+	for i := 0; i < 4; i++ {
+		c.Increment("y")
+	}
+	for i := 0; i < 2; i++ {
+		c.Increment("z")
+	}
+	out, err := Bottom.ValidateRun(c, 2)
+	assert.NoError(t, err)
+	assert.Equal(t, []string{"z", "y"}, out)
+}
+
+func TestBottomNumberMax(t *testing.T) {
+	c := counter.New()
+	for i := 0; i < 8; i++ {
+		c.Increment("x")
+	}
+	for i := 0; i < 4; i++ {
+		c.Increment("y")
+	}
+	for i := 0; i < 2; i++ {
+		c.Increment("z")
+	}
+	out, err := Bottom.ValidateRun(c, 2, 3)
+	assert.NoError(t, err)
+	assert.Equal(t, []string{"z"}, out)
 }

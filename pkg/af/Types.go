@@ -27,7 +27,8 @@ var int16Type = reflect.TypeOf(int16(0))
 var int32Type = reflect.TypeOf(int32(0))
 var int64Type = reflect.TypeOf(int64(0))
 
-//var uint8Type = reflect.TypeOf(uint8(0))
+var uint8Type = reflect.TypeOf(uint8(0))
+
 //var uint16Type = reflect.TypeOf(uint16(0))
 //var uint32Type = reflect.TypeOf(uint32(0))
 //var uint64Type = reflect.TypeOf(uint64(0))
@@ -35,9 +36,14 @@ var int64Type = reflect.TypeOf(int64(0))
 var float32Type = reflect.TypeOf(float32(0.0))
 var float64Type = reflect.TypeOf(0.0)
 
-var byteArrayType = reflect.TypeOf([]byte{})
-var stringArrayType = reflect.TypeOf([]string{})
-var uint8ArrayType = reflect.TypeOf([]uint8{})
+var byteSliceType = reflect.TypeOf([]byte{})
+var byte2DSliceType = reflect.TypeOf([][]byte{})
+
+var uint8SliceType = reflect.TypeOf([]uint8{})
+var uint82DSliceType = reflect.TypeOf([][]uint8{})
+
+var stringSliceType = reflect.TypeOf([]string{})
+
 var intArrayType = reflect.TypeOf([]int{})
 var int64ArrayType = reflect.TypeOf([]int64{})
 var float64ArrayType = reflect.TypeOf([]float64{})

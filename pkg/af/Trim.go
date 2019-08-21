@@ -47,7 +47,7 @@ var Trim = Function{
 	Aliases: []string{"trim"},
 	Definitions: []Definition{
 		Definition{Inputs: []interface{}{reflect.String}, Output: reflect.String},
-		Definition{Inputs: []interface{}{stringArrayType}, Output: reflect.String},
+		Definition{Inputs: []interface{}{stringSliceType}, Output: reflect.String},
 		Definition{Inputs: []interface{}{interfaceArrayType}, Output: reflect.String},
 	},
 	Function: trim,

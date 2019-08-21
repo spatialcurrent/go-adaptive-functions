@@ -8,31 +8,43 @@
 package af
 
 import (
-	"reflect"
 	"testing"
 
-	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
 )
 
-func TestPrefix(t *testing.T) {
+func TestPrefixStrings(t *testing.T) {
+	out, err := Prefix.ValidateRun("foobar", "foo")
+	assert.NoError(t, err)
+	assert.Equal(t, true, out)
+}
 
-	testCases := []TestCase{
-		NewTestCase([]interface{}{[3]int{4, 5, 6}, []int{4, 5}}, Prefix, true),
-		NewTestCase([]interface{}{[]string{"bar", "cafe", "restaurant"}, []interface{}{"bar", "cafe"}}, Prefix, true),
-	}
+func TestPrefixBytes(t *testing.T) {
+	out, err := Prefix.ValidateRun([]byte("foobar"), []byte("foo"))
+	assert.NoError(t, err)
+	assert.Equal(t, true, out)
+}
 
-	for _, testCase := range testCases {
+func TestPrefixInts(t *testing.T) {
+	out, err := Prefix.ValidateRun([]int{1, 2, 3, 4}, []int{1, 2})
+	assert.NoError(t, err)
+	assert.Equal(t, true, out)
+}
 
-		valid := testCase.Function.IsValid(testCase.Inputs)
-		if !valid {
-			t.Errorf("inputs (%v) to function %q are invalid", testCase.Inputs, testCase.Function.Name)
-		}
-		got, err := testCase.Function.Run(testCase.Inputs)
-		if err != nil {
-			t.Errorf(errors.Wrap(err, "error running function \""+reflect.TypeOf(testCase.Function).Name()+"\"").Error())
-		} else if !reflect.DeepEqual(got, testCase.Output) {
-			t.Errorf(testCase.Function.Name+"(%v) == %v (%v), want %v (%s)", testCase.Inputs, got, reflect.TypeOf(got), testCase.Output, reflect.TypeOf(testCase.Output))
-		}
-	}
+func TestPrefixIntsOverflow(t *testing.T) {
+	out, err := Prefix.ValidateRun([]int{1, 2}, []int{1, 2, 3, 4})
+	assert.NoError(t, err)
+	assert.Equal(t, false, out)
+}
 
+func TestPrefixArrays(t *testing.T) {
+	out, err := Prefix.ValidateRun([6]int{1, 2, 3, 4, 5, 6}, [3]int{1, 2, 3})
+	assert.NoError(t, err)
+	assert.Equal(t, true, out)
+}
+
+func TestPrefixSlices(t *testing.T) {
+	out, err := Prefix.ValidateRun([]string{"foo", "bar"}, []string{"foo"})
+	assert.NoError(t, err)
+	assert.Equal(t, true, out)
 }

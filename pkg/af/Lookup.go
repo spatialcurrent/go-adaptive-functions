@@ -30,6 +30,7 @@ func lookup(args ...interface{}) (interface{}, error) {
 		}
 
 		cv := reflect.ValueOf(a).MapIndex(reflect.ValueOf(b).Convert(at.Key()))
+
 		if !cv.IsValid() {
 			if len(args) == 3 {
 				return args[2], nil
@@ -41,23 +42,18 @@ func lookup(args ...interface{}) (interface{}, error) {
 
 	} else if at.Kind() == reflect.Array || at.Kind() == reflect.Slice {
 
-		if bt.Kind() != reflect.Int {
-			return nil, &ErrInvalidArguments{Function: "Lookup", Arguments: args}
-		}
-
 		av := reflect.ValueOf(a)
-		bv := b.(int)
 
-		if bv >= av.Len() {
-			return nil, &ErrInvalidArguments{Function: "Lookup", Arguments: args}
+		if bv, ok := b.(int); ok {
+			if bv >= av.Len() {
+				return nil, &ErrOutOfRange{Index: bv, Max: av.Len() - 1}
+			}
+			return reflect.ValueOf(a).Index(bv).Interface(), nil
 		}
-
-		return reflect.ValueOf(a).Index(bv).Interface(), nil
 
 	}
 
 	return nil, &ErrInvalidArguments{Function: "Lookup", Arguments: args}
-
 }
 
 var Lookup = Function{

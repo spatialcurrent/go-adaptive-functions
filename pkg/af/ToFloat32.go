@@ -28,7 +28,7 @@ func toFloat32(args ...interface{}) (interface{}, error) {
 		return x, nil
 	case float64:
 		if reflect.ValueOf(float32(0.0)).OverflowFloat(x) {
-			return float32(0.0), &ErrorOverflow{Original: x, Target: float32Type}
+			return float32(0.0), &ErrOverflow{Original: x, Target: float32Type}
 		}
 		return float32(x), nil
 	case string:

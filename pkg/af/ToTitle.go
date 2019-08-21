@@ -29,7 +29,7 @@ var ToTitle = Function{
 	Aliases: []string{"title"},
 	Definitions: []Definition{
 		Definition{Inputs: []interface{}{stringType}, Output: stringType},
-		Definition{Inputs: []interface{}{byteArrayType}, Output: byteArrayType},
+		Definition{Inputs: []interface{}{byteSliceType}, Output: byteSliceType},
 	},
 	Function: toTitle,
 }

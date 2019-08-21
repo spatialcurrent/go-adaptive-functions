@@ -8,47 +8,37 @@
 package af
 
 import (
-	"reflect"
 	"testing"
 
-	"github.com/pkg/errors"
+	"github.com/stretchr/testify/assert"
 )
 
-func TestSubtract(t *testing.T) {
+func TestSubtractInts(t *testing.T) {
+	out, err := Subtract.ValidateRun(1, 2)
+	assert.NoError(t, err)
+	assert.Equal(t, -1, out)
+}
 
-	testCases := []TestCase{
-		NewTestCase([]interface{}{1, 2}, Subtract, -1),
-		NewTestCase([]interface{}{4, 2.0}, Subtract, 2.0),
-		NewTestCase(
-			[]interface{}{
-				map[string]string{"a": "x", "b": "y"},
-				map[string]string{"a": "d"},
-			},
-			Subtract,
-			map[string]string{"b": "y"},
-		),
-		NewTestCase(
-			[]interface{}{
-				map[string]string{"a": "x", "b": "y"},
-				map[string]struct{}{"a": struct{}{}},
-			},
-			Subtract,
-			map[string]string{"b": "y"},
-		),
-	}
+func TestSubtractFloats(t *testing.T) {
+	out, err := Subtract.ValidateRun(0.1, 0.3)
+	assert.NoError(t, err)
+	assert.Equal(t, -0.19999999999999998, out)
+}
 
-	for _, testCase := range testCases {
+func TestSubtractMapStringString(t *testing.T) {
+	out, err := Subtract.ValidateRun(map[string]string{"a": "x", "b": "y"}, map[string]string{"a": ""})
+	assert.NoError(t, err)
+	assert.Equal(t, map[string]string{"b": "y"}, out)
+}
 
-		valid := testCase.Function.IsValid(testCase.Inputs)
-		if !valid {
-			t.Errorf("inputs (%v) to function %q are invalid", testCase.Inputs, testCase.Function.Name)
-		}
-		got, err := testCase.Function.Run(testCase.Inputs)
-		if err != nil {
-			t.Errorf(errors.Wrap(err, "error running function \""+reflect.TypeOf(testCase.Function).Name()+"\"").Error())
-		} else if !reflect.DeepEqual(got, testCase.Output) {
-			t.Errorf(testCase.Function.Name+"(%v) == %v (%v), want %v (%s)", testCase.Inputs, got, reflect.TypeOf(got), testCase.Output, reflect.TypeOf(testCase.Output))
-		}
-	}
+func TestSubtractMapStringInterface(t *testing.T) {
+	out, err := Subtract.ValidateRun(map[string]interface{}{"a": "x", "b": "y"}, map[string]interface{}{"a": ""})
+	assert.NoError(t, err)
+	assert.Equal(t, map[string]interface{}{"b": "y"}, out)
+}
 
+func TestSubtractSets(t *testing.T) {
+	out, err := Subtract.ValidateRun(map[string]interface{}{"a": struct{}{}, "b": struct{}{}}, map[string]struct{}{"a": struct{}{}})
+	assert.NoError(t, err)
+	assert.Equal(t, map[string]interface{}{"b": struct{}{}}, out)
 }

@@ -39,8 +39,8 @@ var ToStringArray = Function{
 	Name:    "StringArray",
 	Aliases: []string{"stringArray"},
 	Definitions: []Definition{
-		Definition{Inputs: []interface{}{reflect.Array}, Output: stringArrayType},
-		Definition{Inputs: []interface{}{reflect.Slice}, Output: stringArrayType},
+		Definition{Inputs: []interface{}{reflect.Array}, Output: stringSliceType},
+		Definition{Inputs: []interface{}{reflect.Slice}, Output: stringSliceType},
 	},
 	Function: stringArray,
 }

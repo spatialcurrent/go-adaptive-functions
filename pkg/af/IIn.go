@@ -82,7 +82,7 @@ func iin(args ...interface{}) (interface{}, error) {
 
 		}
 
-	} else if at.AssignableTo(stringArrayType) && bt.AssignableTo(stringArrayType) {
+	} else if at.AssignableTo(stringSliceType) && bt.AssignableTo(stringSliceType) {
 
 		av := a.([]string)
 		bv := b.([]string)
@@ -127,7 +127,7 @@ var IIn = Function{
 		Definition{Inputs: []interface{}{reflect.String, reflect.Slice}, Output: reflect.Bool},
 		Definition{Inputs: []interface{}{reflect.String, reflect.Map}, Output: reflect.Bool},
 		Definition{Inputs: []interface{}{reflect.String, reflect.Struct}, Output: reflect.Bool},
-		Definition{Inputs: []interface{}{stringArrayType, stringArrayType}, Output: reflect.Bool},
+		Definition{Inputs: []interface{}{stringSliceType, stringSliceType}, Output: reflect.Bool},
 	},
 	Function: iin,
 }

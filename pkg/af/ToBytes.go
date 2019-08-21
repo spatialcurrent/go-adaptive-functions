@@ -25,15 +25,15 @@ var ToBytes = Function{
 	Definitions: []Definition{
 		Definition{
 			Inputs: []interface{}{byteType},
-			Output: byteArrayType,
+			Output: byteSliceType,
 		},
 		Definition{
-			Inputs: []interface{}{byteArrayType},
-			Output: byteArrayType,
+			Inputs: []interface{}{byteSliceType},
+			Output: byteSliceType,
 		},
 		Definition{
 			Inputs: []interface{}{stringType},
-			Output: byteArrayType,
+			Output: byteSliceType,
 		},
 	},
 	Function: toBytes,

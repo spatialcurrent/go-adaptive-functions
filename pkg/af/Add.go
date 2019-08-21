@@ -32,7 +32,7 @@ func add(args ...interface{}) (interface{}, error) {
 		}
 		var ct reflect.Type
 		var cv reflect.Value
-		if bt.Key().ConvertibleTo(at.Key()) {
+		if bt.Key().AssignableTo(at.Key()) {
 			if bt.Elem().AssignableTo(at.Elem()) {
 				ct = at
 				cv = reflect.MakeMap(ct)
@@ -40,7 +40,7 @@ func add(args ...interface{}) (interface{}, error) {
 				ct = reflect.MapOf(at.Key(), interfaceType)
 				cv = reflect.MakeMap(ct)
 			}
-		} else if at.Key().ConvertibleTo(bt.Key()) {
+		} else if at.Key().AssignableTo(bt.Key()) {
 			if at.Elem().AssignableTo(bt.Elem()) {
 				ct = bt
 				cv = reflect.MakeMap(ct)
@@ -49,7 +49,8 @@ func add(args ...interface{}) (interface{}, error) {
 				cv = reflect.MakeMap(ct)
 			}
 		} else {
-			return nil, &ErrInvalidArguments{Function: "Add", Arguments: args}
+			ct = reflect.MapOf(interfaceType, interfaceType)
+			cv = reflect.MakeMap(ct)
 		}
 
 		av := reflect.ValueOf(a)

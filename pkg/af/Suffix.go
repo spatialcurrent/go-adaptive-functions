@@ -8,6 +8,7 @@
 package af
 
 import (
+	"bytes"
 	"reflect"
 	"strings"
 )
@@ -20,6 +21,18 @@ func suffix(args ...interface{}) (interface{}, error) {
 
 	a := args[0]
 	b := args[1]
+
+	if av, ok := a.(string); ok {
+		if bv, ok := b.(string); ok {
+			return strings.HasSuffix(av, bv), nil
+		}
+	}
+
+	if av, ok := a.([]byte); ok {
+		if bv, ok := b.([]byte); ok {
+			return bytes.HasSuffix(av, bv), nil
+		}
+	}
 
 	at := reflect.TypeOf(a)
 	bt := reflect.TypeOf(b)
@@ -39,7 +52,7 @@ func suffix(args ...interface{}) (interface{}, error) {
 	bl := bv.Len()
 
 	if bl > al {
-		return nil, &ErrInvalidArguments{Function: "Suffix", Arguments: args}
+		return false, nil
 	}
 
 	for i := 0; i < bl; i++ {
