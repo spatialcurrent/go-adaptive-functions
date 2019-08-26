@@ -5,7 +5,7 @@
 //
 // =================================================================
 
-// Package af includes functions for the JavaScript build of go-adaptive-functions.
+// Package afjs includes functions for the JavaScript build of go-adaptive-functions.
 //
 package afjs
 

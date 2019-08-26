@@ -44,7 +44,7 @@ fmt:  ## Format Go source code
 
 .PHONY: imports
 imports: ## Update imports in Go source code
-	goimports -w -local github.com/spatialcurrent/go-adaptive-functions $$(find . -iname '*.go')
+	goimports -w -local github.com/spatialcurrent/go-adaptive-functions,github.com/spatialcurrent/ $$(find . -iname '*.go')
 
 .PHONY: vet
 vet: ## Vet Go source code

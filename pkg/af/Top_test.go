@@ -10,8 +10,9 @@ package af
 import (
 	"testing"
 
-	"github.com/spatialcurrent/go-counter/pkg/counter"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/spatialcurrent/go-counter/pkg/counter"
 )
 
 func TestTop(t *testing.T) {

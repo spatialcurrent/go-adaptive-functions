@@ -18,7 +18,7 @@ type ErrOverflow struct {
 	Target   reflect.Type // the target type
 }
 
-// ErrOverflow returns the error as a string.
+// Error returns the error as a string.
 func (e ErrOverflow) Error() string {
-	return "overflow error when trying to convert " + fmt.Sprint(e.Original) + "(" + fmt.Sprint(reflect.TypeOf(e.Original)) + ")" + " to " + fmt.Sprint(e.Target)
+	return fmt.Sprintf("overflow error when trying to convert %v (%T) to %v", e.Original, e.Original, e.Target)
 }
