@@ -14,7 +14,7 @@ import (
 )
 
 func TestToValues(t *testing.T) {
-	out, err := ToValues.ValidateRun(map[string]interface{}{"a": "x", "b": "y"})
+	out, err := ToValues.ValidateRun(map[string]interface{}{"a": "x"})
 	assert.NoError(t, err)
-	assert.Equal(t, []interface{}{"x", "y"}, out)
+	assert.Equal(t, []interface{}{"x"}, out)
 }

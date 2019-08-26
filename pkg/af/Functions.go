@@ -30,6 +30,7 @@ var Functions = []Function{
 	Last,
 	Limit,
 	Lookup,
+	Make,
 	Max,
 	Mean,
 	Min,
@@ -74,4 +75,5 @@ var Functions = []Function{
 	ToValues,
 	Trim,
 	Within,
+	Words,
 }
