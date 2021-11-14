@@ -18,6 +18,6 @@ func Example_toValues() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(fmt.Sprintf("%#v", out))
+	fmt.Printf("%#v\n", out)
 	// Output: []string{"x"}
 }

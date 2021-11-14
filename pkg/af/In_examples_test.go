@@ -1,6 +1,6 @@
 // =================================================================
 //
-// Copyright (C) 2019 Spatial Current, Inc. - All Rights Reserved
+// Copyright (C) 2021 Spatial Current, Inc. - All Rights Reserved
 // Released as open source under the MIT License.  See LICENSE file.
 //
 // =================================================================
@@ -20,7 +20,7 @@ func Example_inMap() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(fmt.Sprintf("%#v", out))
+	fmt.Printf("%#v\n", out)
 	// Output: true
 }
 
@@ -30,7 +30,7 @@ func Example_inSlice() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(fmt.Sprintf("%#v", out))
+	fmt.Printf("%#v\n", out)
 	// Output: true
 }
 
@@ -42,6 +42,6 @@ func Example_inIPRange() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(fmt.Sprintf("%#v", out))
+	fmt.Printf("%#v\n", out)
 	// Output: true
 }
