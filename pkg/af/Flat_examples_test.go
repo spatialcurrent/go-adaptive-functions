@@ -1,6 +1,6 @@
 // =================================================================
 //
-// Copyright (C) 2019 Spatial Current, Inc. - All Rights Reserved
+// Copyright (C) 2021 Spatial Current, Inc. - All Rights Reserved
 // Released as open source under the MIT License.  See LICENSE file.
 //
 // =================================================================
@@ -23,6 +23,6 @@ func Example_flat() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(fmt.Sprintf("%#v", out))
+	fmt.Printf("%#v\n", out)
 	// Output: []interface {}{"a", "b", "c", "d", "e", "f"}
 }
