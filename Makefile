@@ -22,7 +22,7 @@ imports: bin/goimports ## Update imports in Go source code
 	bin/goimports -w -local github.com/spatialcurrent/go-adapative-functions,github.com/spatialcurrent $$(find . -iname '*.go')
 
 vet: ## Vet Go source code
-	go vet github.com/spatialcurrent/go-adapative-functions/pkg/... # vet packages
+	go vet github.com/spatialcurrent/go-adaptive-functions/pkg/... # vet packages
 
 tidy: ## Tidy Go source code
 	go mod tidy
