@@ -17,6 +17,7 @@ var Functions = []Function{
 	Coalesce,
 	Concat,
 	Divide,
+	Empty,
 	First,
 	Flat,
 	Fold,
