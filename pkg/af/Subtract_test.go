@@ -13,6 +13,14 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestSubtractIsBoolean(t *testing.T) {
+	assert.False(t, Subtract.IsBoolean())
+}
+
+func TestSubtractIsNumber(t *testing.T) {
+	assert.False(t, Subtract.IsNumber())
+}
+
 func TestSubtractInts(t *testing.T) {
 	out, err := Subtract.ValidateRun(1, 2)
 	assert.NoError(t, err)
