@@ -13,6 +13,18 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestLengthIsNumber(t *testing.T) {
+	assert.True(t, Length.IsNumber())
+}
+
+func TestLengthIsInteger(t *testing.T) {
+	assert.True(t, Length.IsInteger())
+}
+
+func TestLengthIsFloat(t *testing.T) {
+	assert.False(t, Length.IsFloat())
+}
+
 func TestLengthArray(t *testing.T) {
 	out, err := Length.ValidateRun([3]string{"a", "b", "c"})
 	assert.NoError(t, err)

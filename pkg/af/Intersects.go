@@ -40,7 +40,7 @@ func intersects(args ...interface{}) (interface{}, error) {
 }
 
 var Intersects = Function{
-	Name:    "intersects",
+	Name:    "Intersects",
 	Aliases: []string{"intersects"},
 	Definitions: []Definition{
 		Definition{Inputs: []interface{}{reflect.Map, reflect.Map}, Output: reflect.Bool},
