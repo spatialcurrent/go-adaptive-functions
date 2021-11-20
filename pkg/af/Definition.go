@@ -17,6 +17,16 @@ type Definition struct {
 	Output interface{}   // the type or kind returned by the defined function
 }
 
+// IsBoolean returns true if the definition always returns a boolean value.
+func (d Definition) IsBoolean(args ...interface{}) bool {
+	if k, ok := d.Output.(reflect.Kind); ok {
+		if k == reflect.Bool {
+			return true
+		}
+	}
+	return false
+}
+
 // IsValid returns true if the args match the kinds or types or the definition.
 func (d Definition) IsValid(args ...interface{}) bool {
 	if d.Inputs == nil {

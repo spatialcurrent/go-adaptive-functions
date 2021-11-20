@@ -25,6 +25,19 @@ func (f Function) Map() map[string]interface{} {
 	}
 }
 
+// IsBoolean returns true if the function always returns a boolean value.
+func (f Function) IsBoolean() bool {
+	if len(f.Definitions) == 0 {
+		return false
+	}
+	for _, d := range f.Definitions {
+		if !d.IsBoolean() {
+			return false
+		}
+	}
+	return true
+}
+
 // IsValid returns true if the arguments match a definition of the function.
 func (f Function) IsValid(args ...interface{}) bool {
 	if len(f.Definitions) == 0 {

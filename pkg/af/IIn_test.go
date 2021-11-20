@@ -13,6 +13,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestIInIsBoolean(t *testing.T) {
+	assert.True(t, IIn.IsBoolean())
+}
+
 func TestIInString(t *testing.T) {
 	out, err := IIn.ValidateRun("hello", "Hello World")
 	assert.NoError(t, err)

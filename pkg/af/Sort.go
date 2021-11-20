@@ -8,6 +8,7 @@
 package af
 
 import (
+	"reflect"
 	"sort"
 )
 
@@ -56,8 +57,8 @@ var Sort = Function{
 	Definitions: []Definition{
 		Definition{Inputs: []interface{}{stringSliceType}, Output: stringSliceType},
 		Definition{Inputs: []interface{}{intSliceType}, Output: intSliceType},
-		Definition{Inputs: []interface{}{stringSliceType, boolType}, Output: stringSliceType},
-		Definition{Inputs: []interface{}{intSliceType, boolType}, Output: intSliceType},
+		Definition{Inputs: []interface{}{stringSliceType, reflect.Bool}, Output: stringSliceType},
+		Definition{Inputs: []interface{}{intSliceType, reflect.Bool}, Output: intSliceType},
 	},
 	Function: sortArray,
 }

@@ -15,8 +15,6 @@ import (
 
 var interfaceType = reflect.TypeOf(map[string]interface{}{}).Elem()
 
-var boolType = reflect.TypeOf(false)
-
 var byteType = reflect.TypeOf(byte(0))
 var stringType = reflect.TypeOf("")
 var emptyStructType = reflect.TypeOf(struct{}{})
