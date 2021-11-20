@@ -77,6 +77,19 @@ func (f Function) IsNumber() bool {
 	return true
 }
 
+// IsString returns true if the function always returns a string value.
+func (f Function) IsString() bool {
+	if len(f.Definitions) == 0 {
+		return false
+	}
+	for _, d := range f.Definitions {
+		if !d.IsString() {
+			return false
+		}
+	}
+	return true
+}
+
 // IsValid returns true if the arguments match a definition of the function.
 func (f Function) IsValid(args ...interface{}) bool {
 	if len(f.Definitions) == 0 {

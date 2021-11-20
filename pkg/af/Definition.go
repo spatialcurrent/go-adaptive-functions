@@ -17,7 +17,7 @@ type Definition struct {
 	Output interface{}   // the type or kind returned by the defined function
 }
 
-// IsBoolean returns true if the definition always returns a boolean value.
+// IsBoolean returns true if the definition returns a boolean value.
 func (d Definition) IsBoolean() bool {
 	if k, ok := d.Output.(reflect.Kind); ok {
 		if k == reflect.Bool {
@@ -27,7 +27,7 @@ func (d Definition) IsBoolean() bool {
 	return false
 }
 
-// IsInteger returns true if the definition always returns an integer value.
+// IsInteger returns true if the definition returns an integer value.
 func (d Definition) IsInteger() bool {
 	if k, ok := d.Output.(reflect.Kind); ok {
 		if k == reflect.Int || k == reflect.Int8 || k == reflect.Int16 || k == reflect.Int32 || k == reflect.Int64 || k == reflect.Uint || k == reflect.Uint8 || k == reflect.Uint16 || k == reflect.Uint32 || k == reflect.Uint64 {
@@ -37,7 +37,7 @@ func (d Definition) IsInteger() bool {
 	return false
 }
 
-// IsFloat returns true if the definition always returns a floating point number value.
+// IsFloat returns true if the definition returns a floating point number value.
 func (d Definition) IsFloat() bool {
 	if k, ok := d.Output.(reflect.Kind); ok {
 		if k == reflect.Float32 || k == reflect.Float64 {
@@ -47,9 +47,19 @@ func (d Definition) IsFloat() bool {
 	return false
 }
 
-// IsNumber returns true if the definition always returns a numeric value.
+// IsNumber returns true if the definition returns a numeric value.
 func (d Definition) IsNumber() bool {
 	return d.IsInteger() || d.IsFloat()
+}
+
+// IsString returns true if the definition returns a string value.
+func (d Definition) IsString() bool {
+	if k, ok := d.Output.(reflect.Kind); ok {
+		if k == reflect.String {
+			return true
+		}
+	}
+	return false
 }
 
 // IsValid returns true if the args match the kinds or types or the definition.
