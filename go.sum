@@ -12,10 +12,10 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/spatialcurrent/go-counter v0.0.0-20190821021037-4da7b148c929 h1:HH57VLI/3bCnmAQiGpJ1Z12XY9GRYVWGaIOTQVrDnEc=
 github.com/spatialcurrent/go-counter v0.0.0-20190821021037-4da7b148c929/go.mod h1:QItIBDJS3LRqhRJ720+YE+FitvGuKh0Ya5TNZJr0OMs=
-github.com/spatialcurrent/go-flat v0.0.0-20190614224243-1737c98cb7a7 h1:0EZ2l/yDqUTfjcfU11vTjXraZrHm+0FnzPbWXLeitcg=
-github.com/spatialcurrent/go-flat v0.0.0-20190614224243-1737c98cb7a7/go.mod h1:tUOgTSipHNvA4YwVwDoEkjxpLvBsLgVC1mi5RzudEzA=
-github.com/spatialcurrent/go-math v0.0.0-20190819130657-2cfc39a3b810 h1:MRy+O6Ur77IaBuYAp1c3e+AdPWsybeaiExE8RY1TkD8=
-github.com/spatialcurrent/go-math v0.0.0-20190819130657-2cfc39a3b810/go.mod h1:sAzkb4LxJragI6kYDetC/p7OuEWpt5h9hlPraFV+m90=
+github.com/spatialcurrent/go-flat v0.0.0-20211120212314-7d520440d6c9 h1:BATrRaf2rUk1dqP1QX7K5SVK/eXLl26ojIJCG3Db4AM=
+github.com/spatialcurrent/go-flat v0.0.0-20211120212314-7d520440d6c9/go.mod h1:hdAJxPwiQwE8MiJWOSFyV6PDVp0sdu9o5+wvss5dHcs=
+github.com/spatialcurrent/go-math v0.0.0-20211120210754-b3872f7000fe h1:UFsicKS0k9MUcQ77fNxUunZsMXC4ONQkWuNjEU6QLFg=
+github.com/spatialcurrent/go-math v0.0.0-20211120210754-b3872f7000fe/go.mod h1:Qi3hKb+gZcrrrNW43w2A1hd6bMJyn+XezTiyCZyB1FI=
 github.com/spatialcurrent/go-stringify v0.0.0-20190614132730-232a67e2a3f0 h1:l4UzgqbtT6mEZZYOPql9ghN8g+v/yOV8XovCAtlyXX8=
 github.com/spatialcurrent/go-stringify v0.0.0-20190614132730-232a67e2a3f0/go.mod h1:htuZzqfybDfX30jb5A0gDDO0z0P+bRpqXLLOcN/QNWQ=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=

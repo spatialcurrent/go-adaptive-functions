@@ -7,6 +7,10 @@
 
 package af
 
+import (
+	"reflect"
+)
+
 func toBytes(args ...interface{}) (interface{}, error) {
 	switch x := args[0].(type) {
 	case string:
@@ -25,7 +29,7 @@ var ToBytes = Function{
 	Definitions: []Definition{
 		Definition{Inputs: []interface{}{byteType}, Output: byteSliceType},
 		Definition{Inputs: []interface{}{byteSliceType}, Output: byteSliceType},
-		Definition{Inputs: []interface{}{stringType}, Output: byteSliceType},
+		Definition{Inputs: []interface{}{reflect.String}, Output: byteSliceType},
 	},
 	Function: toBytes,
 }

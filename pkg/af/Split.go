@@ -1,6 +1,6 @@
 // =================================================================
 //
-// Copyright (C) 2019 Spatial Current, Inc. - All Rights Reserved
+// Copyright (C) 2021 Spatial Current, Inc. - All Rights Reserved
 // Released as open source under the MIT License.  See LICENSE file.
 //
 // =================================================================
@@ -16,8 +16,8 @@ var Split = Function{
 	Name:    "Split",
 	Aliases: []string{"split"},
 	Definitions: []Definition{
-		Definition{Inputs: []interface{}{stringType, stringType}, Output: reflect.Slice},
-		Definition{Inputs: []interface{}{stringType, stringType, intType}, Output: reflect.Slice},
+		Definition{Inputs: []interface{}{reflect.String, reflect.String}, Output: reflect.Slice},
+		Definition{Inputs: []interface{}{reflect.String, reflect.String, intType}, Output: reflect.Slice},
 	},
 	Function: func(args ...interface{}) (interface{}, error) {
 		if str, ok := args[0].(string); ok {

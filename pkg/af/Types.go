@@ -1,6 +1,6 @@
 // =================================================================
 //
-// Copyright (C) 2019 Spatial Current, Inc. - All Rights Reserved
+// Copyright (C) 2021 Spatial Current, Inc. - All Rights Reserved
 // Released as open source under the MIT License.  See LICENSE file.
 //
 // =================================================================
@@ -16,7 +16,6 @@ import (
 var interfaceType = reflect.TypeOf(map[string]interface{}{}).Elem()
 
 var byteType = reflect.TypeOf(byte(0))
-var stringType = reflect.TypeOf("")
 var emptyStructType = reflect.TypeOf(struct{}{})
 
 var intType = reflect.TypeOf(0)

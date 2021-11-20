@@ -1,6 +1,6 @@
 // =================================================================
 //
-// Copyright (C) 2019 Spatial Current, Inc. - All Rights Reserved
+// Copyright (C) 2021 Spatial Current, Inc. - All Rights Reserved
 // Released as open source under the MIT License.  See LICENSE file.
 //
 // =================================================================
@@ -9,6 +9,7 @@ package af
 
 import (
 	"bytes"
+	"reflect"
 	"strings"
 )
 
@@ -28,7 +29,7 @@ var ToTitle = Function{
 	Name:    "ToTitle",
 	Aliases: []string{"title"},
 	Definitions: []Definition{
-		Definition{Inputs: []interface{}{stringType}, Output: stringType},
+		Definition{Inputs: []interface{}{reflect.String}, Output: reflect.String},
 		Definition{Inputs: []interface{}{byteSliceType}, Output: byteSliceType},
 	},
 	Function: toTitle,
