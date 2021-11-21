@@ -9,6 +9,7 @@ package af
 
 import (
 	"bytes"
+	"reflect"
 	"strings"
 )
 
@@ -28,7 +29,7 @@ var ToUpper = Function{
 	Name:    "ToUpper",
 	Aliases: []string{"upper"},
 	Definitions: []Definition{
-		Definition{Inputs: []interface{}{stringType}, Output: stringType},
+		Definition{Inputs: []interface{}{reflect.String}, Output: reflect.String},
 		Definition{Inputs: []interface{}{byteSliceType}, Output: byteSliceType},
 	},
 	Function: toUpper,

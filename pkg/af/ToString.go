@@ -1,6 +1,6 @@
 // =================================================================
 //
-// Copyright (C) 2019 Spatial Current, Inc. - All Rights Reserved
+// Copyright (C) 2021 Spatial Current, Inc. - All Rights Reserved
 // Released as open source under the MIT License.  See LICENSE file.
 //
 // =================================================================
@@ -35,7 +35,7 @@ var ToString = Function{
 	Name:    "ToString",
 	Aliases: []string{"string", "str"},
 	Definitions: []Definition{
-		Definition{Inputs: []interface{}{nil}, Output: stringType},
+		Definition{Inputs: []interface{}{nil}, Output: reflect.String},
 	},
 	Function: toString,
 }

@@ -1,6 +1,6 @@
 // =================================================================
 //
-// Copyright (C) 2019 Spatial Current, Inc. - All Rights Reserved
+// Copyright (C) 2021 Spatial Current, Inc. - All Rights Reserved
 // Released as open source under the MIT License.  See LICENSE file.
 //
 // =================================================================
@@ -23,6 +23,71 @@ func (f Function) Map() map[string]interface{} {
 		"description": f.Description,
 		"aliases":     f.Aliases,
 	}
+}
+
+// IsBoolean returns true if the function always returns a boolean value.
+func (f Function) IsBoolean() bool {
+	if len(f.Definitions) == 0 {
+		return false
+	}
+	for _, d := range f.Definitions {
+		if !d.IsBoolean() {
+			return false
+		}
+	}
+	return true
+}
+
+// IsInteger returns true if the function always returns an integer value.
+func (f Function) IsInteger() bool {
+	if len(f.Definitions) == 0 {
+		return false
+	}
+	for _, d := range f.Definitions {
+		if !d.IsInteger() {
+			return false
+		}
+	}
+	return true
+}
+
+// IsFloat returns true if the function always returns a floating point number value.
+func (f Function) IsFloat() bool {
+	if len(f.Definitions) == 0 {
+		return false
+	}
+	for _, d := range f.Definitions {
+		if !d.IsFloat() {
+			return false
+		}
+	}
+	return true
+}
+
+// IsNumber returns true if the function always returns a numeric value.
+func (f Function) IsNumber() bool {
+	if len(f.Definitions) == 0 {
+		return false
+	}
+	for _, d := range f.Definitions {
+		if !d.IsNumber() {
+			return false
+		}
+	}
+	return true
+}
+
+// IsString returns true if the function always returns a string value.
+func (f Function) IsString() bool {
+	if len(f.Definitions) == 0 {
+		return false
+	}
+	for _, d := range f.Definitions {
+		if !d.IsString() {
+			return false
+		}
+	}
+	return true
 }
 
 // IsValid returns true if the arguments match a definition of the function.

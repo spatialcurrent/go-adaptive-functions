@@ -7,8 +7,8 @@ require (
 	github.com/kisielk/errcheck v1.6.0
 	github.com/pkg/errors v0.9.1
 	github.com/spatialcurrent/go-counter v0.0.0-20190821021037-4da7b148c929
-	github.com/spatialcurrent/go-flat v0.0.0-20190614224243-1737c98cb7a7
-	github.com/spatialcurrent/go-math v0.0.0-20190819130657-2cfc39a3b810
+	github.com/spatialcurrent/go-flat v0.0.0-20211120212314-7d520440d6c9
+	github.com/spatialcurrent/go-math v0.0.0-20211120210754-b3872f7000fe
 	github.com/spatialcurrent/go-stringify v0.0.0-20190614132730-232a67e2a3f0
 	github.com/stretchr/testify v1.7.0
 	golang.org/x/tools v0.1.7

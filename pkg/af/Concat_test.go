@@ -13,6 +13,14 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestConcatIsBoolean(t *testing.T) {
+	assert.False(t, Concat.IsBoolean())
+}
+
+func TestConcatIsString(t *testing.T) {
+	assert.True(t, Concat.IsString())
+}
+
 func TestConcat(t *testing.T) {
 	in := []interface{}{
 		[]interface{}{

@@ -13,6 +13,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestAddIsBoolean(t *testing.T) {
+	assert.False(t, Add.IsBoolean())
+}
+
 func TestAddInts(t *testing.T) {
 	out, err := Add.ValidateRun(1, 2)
 	assert.NoError(t, err)

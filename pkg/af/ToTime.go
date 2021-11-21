@@ -8,6 +8,7 @@
 package af
 
 import (
+	"reflect"
 	"time"
 )
 
@@ -48,7 +49,7 @@ var ToTime = Function{
 	Name:    "ToTime",
 	Aliases: []string{"time"},
 	Definitions: []Definition{
-		Definition{Inputs: []interface{}{stringType}, Output: timeType},
+		Definition{Inputs: []interface{}{reflect.String}, Output: timeType},
 		Definition{Inputs: []interface{}{timeType}, Output: timeType},
 	},
 	Function: toTime,
